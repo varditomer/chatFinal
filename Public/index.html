@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+    integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <title>Login</title>
+</head>
+
+<body>
+  <main class="main-content">
+    <div class="join-container">
+      <header class="join-header">
+        <h1>Welcome</h1>
+      </header>
+      <main class="join-main">
+        <h1 style="color:black">Solution Focused Negotiation</h1>
+        <div class="form-control">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" placeholder="Enter username..." required />
+        </div>
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="Enter password..." required />
+        </div>
+        <div id="message" style="font-size: 16px;color: crimson; font-weight: bold; text-align: center;"></div>
+        <div>
+          <div class="container signin">
+            <a href="../restPassword/restPassword.html" class="link">Forgot your password?</a>
+          </div>
+          <button type="submit" onclick="login()" class="btn">Login</button>
+          <div class="bottom_part">
+            <strong class="text_strong"> New? Register here! </strong>
+            <a href="./pages/registration/registration.html">
+              <button type="button" class="btn">Register</button>
+            </a>
+            <div class="container signin">
+              <a href="../connectUs/connectUs.html" class="link">Contact us </a>
+            </div>
+          </div>
+      </main>
+    </div>
+
+  </main>
+
+  <script type="module" src="index.js"></script> <!-- This is where you're using ES6 modules -->
+
+
+</body>
+
+</html>

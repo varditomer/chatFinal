@@ -1,0 +1,15 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+    justify-content: center;
+}
+
+.join-container {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* gap: 20px; */
+}

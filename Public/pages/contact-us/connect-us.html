@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+    integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <title>Connect us</title>
+</head>
+
+<body>
+
+  <div class="join-container">
+    <header class="join-header">
+      <h1>Contact Us</h1>
+    </header>
+
+    <main class="join-main">
+
+      <div class="form-control">
+        <ul>
+          <li>
+            <div class="input-box padding_hf">
+              <label for="firstname">First Name:</label>
+              <input placeholder="Enter first name..." type="text" class="input-text required-entry " title="firstname"
+                id="firstname" name="options[2]" value="">
+              <div id="error-firstname" class="error-message"></div>
+            </div>
+          </li>
+
+          <li>
+            <div class="input-box padding_hf">
+              <label for="lastname">Last Name:</label>
+              <input placeholder="Enter last name..." type="text" class="input-text required-entry " title="lastname"
+                id="lastname" name="options[3]" value="">
+              <div id="error-lastname" class="error-message"></div>
+            </div>
+          </li>
+
+          <li>
+            <div class="input-box padding_hf">
+              <label for="mail">Email:</label>
+              <input placeholder="Enter email..." type="text" class="input-text validate-email  required-entry"
+                title="mail" id="mail" name="options[4]" value="">
+              <div id="error-email" class="error-message"></div>
+            </div>
+          </li>
+          <li>
+            <div class="input-box padding_hf">
+              <label for="phone">Phone:</label>
+              <input placeholder="Enter phone..." type="text" class="input-text  validate-phoneStrict" title="phone"
+                id="phone" name="options[5]" maxlength="10" value="">
+              <div id="error-phone" class="error-message"></div>
+            </div>
+            <br>
+          </li>
+
+          <div class="form-control">
+            <label for=Subject>Subject</label>
+            <select id="Subject">
+              <option value="Technical">Technical</option>
+              <option value="Privacy">Privacy</option>
+              <option value="Dissatisfaction">Dissatisfaction</option>
+              <option value="Other">Other</option>
+            </select>
+            <div id="error-subject" class="error-message"></div>
+          </div>
+          <li>
+
+            <div class="input-box padding_hf">
+
+            </div>
+
+          </li>
+
+          <li>
+            <div class="input-box padding_hf">
+              <label for="description">Desctiption:</label>
+              <textarea placeholder="Enter your description..." style=color:black rows="8" cols="57"
+                class="join-container" title="description" id="description" name=description></textarea>
+              <div id="error-description" class="error-message"></div>
+            </div>
+            <div class="buttons-set padding_hf"> <br><br>
+              <input type="hidden" name="form_id" id="form_id" value="1">
+              <button type="submit" onclick="sendEmail()" class="btn">Send</button>
+
+
+            </div>
+
+          </li>
+        </ul>
+      </div>
+    </main>
+  </div>
+
+  <button class="home_btn" onclick="goToHomePage()">Back</button>
+
+  <script type="module" src="./connectUs.js"></script>
+
+</body>
+
+</html>
