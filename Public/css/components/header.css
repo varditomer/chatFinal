@@ -1,0 +1,12 @@
+.join-header {
+    color: #fff;
+    text-align: center;
+    padding: 26px;
+    width: 100%;
+  
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      #000000 0%,
+      #141414 100%
+    ); /* for titles*/
+  }

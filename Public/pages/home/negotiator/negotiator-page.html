@@ -14,39 +14,75 @@
 
 <body>
 
-  <section class="page">
-    <div class="join-container">
-      <header class="join-header">
-        <h1>Welcome back!</h1>
-      </header>
-      <main class="join-main">
+  <header class="join-header">
+    <h1>Welcome back!</h1>
+  </header>
 
-        <div class="form-control">
-          <button class="button button5" onclick="continueNegotiation()">Continue negotiation</button>
+  <div class="join-container">
+    <main class="join-main">
 
-          <a href="../../negotiation/new-negotiation/new-negotiation.html">
-            <button class="button button5">New Negotiation</button>
-          </a>
+      <div class="form-control">
+        <button class="button nav-btn" onclick="continueNegotiation()">
+          <div class="left">
+            <i class="far fa-comment-dots"></i>
+            <span class="btn-txt">
+              Continue negotiation
+            </span>
+          </div>
+          <i class="fas fa-long-arrow-alt-right"></i>
+        </button>
 
-          <a href="../../notification/notifications/notifications.html">
-            <button class="button button5">Notifications</button>
-          </a>
+        <a href="../../negotiation/new-negotiation/new-negotiation.html" class="nav-btn">
+          <button class="button">
+            <div class="left">
+              <i class="fas fa-plus-square"></i>
+              <span class="btn-txt">
+                New Negotiation
+              </span>
+            </div>
+            <i class="fas fa-long-arrow-alt-right"></i>
+          </button>
+        </a>
 
-          <a href="../../contact-us/connect-us.html">
-            <button class="button button5">Contact Us</button>
-          </a>
+        <a href="../../notification/notifications/notifications.html" class="nav-btn">
+          <button class="button">
+            <div class="left">
+              <i class="far fa-bell"></i>
+              <span class="btn-txt">
+                Notifications
+              </span>
+            </div>
+            <i class="fas fa-long-arrow-alt-right"></i>
+          </button>
+        </a>
 
-        </div>
+        <a href="../../contact-us/connect-us.html" class="nav-btn">
+          <button class="button">
+            <div class="left">
+              <i class="far fa-envelope-open"></i>
+              <span class="btn-txt">
+                Contact Us
+              </span>
+            </div>
+            <i class="fas fa-long-arrow-alt-right"></i>
+          </button>
+        </a>
 
-      </main>
+      </div>
 
-    </div>
+    </main>
 
-    <button class="logout_btn" onclick="logout()">Logout</button>
+  </div>
 
-    <script type="module" src="../homePage.js"></script>
+  <button class="logout_btn" onclick="logout()">
+    <i class="fas fa-sign-out-alt"></i>
+    <span class="btn-txt">
+      Logout
+    </span>
+  </button>
 
-  </section>
+  <script type="module" src="../homePage.js"></script>
+
 
 </body>
 

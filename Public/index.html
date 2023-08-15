@@ -13,40 +13,38 @@
 </head>
 
 <body>
-  <main class="main-content">
-    <div class="join-container">
-      <header class="join-header">
-        <h1>Welcome</h1>
-      </header>
-      <main class="join-main">
-        <h1 style="color:black">Solution Focused Negotiation</h1>
-        <div class="form-control">
-          <label for="username">Username</label>
-          <input type="text" name="username" id="username" placeholder="Enter username..." required />
+  <header class="join-header">
+    <h1>Welcome</h1>
+  </header>
+  
+  <div class="join-container login">
+    <main class="join-main card">
+      <h1 style="color:black">Login</h1>
+      <div class="form-control login" style="gap:5px">
+        <label class="login" for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="Enter username..." required />
+      </div>
+      <div class="form-control login">
+        <label class="login" for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter password..." required />
+      </div>
+      <div id="message" style="font-size: 16px;color: crimson; font-weight: bold; text-align: center;"></div>
+      <div>
+        <div class="container signin">
+          <a href="../restPassword/restPassword.html" class="link">Forgot your password?</a>
         </div>
-        <div class="form-control">
-          <label for="password">Password</label>
-          <input type="password" name="password" id="password" placeholder="Enter password..." required />
+        <button type="submit" onclick="login()" class="btn">Login</button>
+        <div class="bottom_part">
+          <strong class="text_strong"> New? Register here! </strong>
+          <a href="./pages/registration/registration.html">
+            <button type="button" class="btn">Register</button>
+          </a>
         </div>
-        <div id="message" style="font-size: 16px;color: crimson; font-weight: bold; text-align: center;"></div>
-        <div>
-          <div class="container signin">
-            <a href="../restPassword/restPassword.html" class="link">Forgot your password?</a>
-          </div>
-          <button type="submit" onclick="login()" class="btn">Login</button>
-          <div class="bottom_part">
-            <strong class="text_strong"> New? Register here! </strong>
-            <a href="./pages/registration/registration.html">
-              <button type="button" class="btn">Register</button>
-            </a>
-            <div class="container signin">
-              <a href="../connectUs/connectUs.html" class="link">Contact us </a>
-            </div>
-          </div>
-      </main>
-    </div>
+    </main>
+  </div>
+  <div></div>
 
-  </main>
+  <!-- </main> -->
 
   <script type="module" src="index.js"></script> <!-- This is where you're using ES6 modules -->
 

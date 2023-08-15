@@ -13,23 +13,58 @@
 </head>
 
 <body>
+  <header class="join-header">
+    <h1>Welcome back!</h1>
+  </header>
   <div class="join-container">
-    <header class="join-header">
-      <h1>Welcome back!</h1>
-    </header>
     <main class="join-main">
       <div class="form-control">
-        <a href="./approve-mediator/approve-mediator.html" class="button button5">Approve Mediator</a>
-        <a href="./approve-negotiation/approve-negotiation.html" class="button button5">Approve Negotiation</a>
-        <a href="../../system-reports/view-system-reports/view-system-reports.html" class="button button5">View System Reports</a>
-        <a href="./write-system-notifications/write-system-notifications.html" class="button button5" onclick="writeSystemNotifications()">Write System Notifications</a>
+
+        <a href="./approve-mediator/approve-mediator.html" class="nav-btn">
+          <button class="button">
+            <div class="left">
+              <i class="fas fa-gavel"></i>
+              <span class="btn-txt">
+                Approve Mediator
+              </span>
+            </div>
+            <i class="fas fa-long-arrow-alt-right"></i>
+          </button>
+        </a>
+        <a href="../../system-reports/view-system-reports/view-system-reports.html" class="nav-btn">
+          <button class="button">
+            <div class="left">
+              <i class="fas fa-bug"></i>
+              <span class="btn-txt">
+                System Reports
+              </span>
+            </div>
+            <i class="fas fa-long-arrow-alt-right"></i>
+          </button>
+        </a>
+        <a href="./write-system-notifications/write-system-notifications.html" class="button nav-btn">
+          <button class="button" onclick="writeSystemNotifications()">
+            <div class="left">
+              <i class="far fa-dot-circle"></i>
+              <span class="btn-txt">
+                Write System Notifications
+              </span>
+            </div>
+            <i class="fas fa-long-arrow-alt-right"></i>
+          </button>
+        </a>
       </div>
 
 
     </main>
   </div>
 
-  <button class="logout_btn" onclick="logout()">Logout</button>
+  <button class="logout_btn" onclick="logout()">
+    <i class="fas fa-sign-out-alt"></i>
+    <span class="btn-txt">
+      Logout
+    </span>
+  </button>
 
   <script type="module" src="./managerPage.js"></script>
 

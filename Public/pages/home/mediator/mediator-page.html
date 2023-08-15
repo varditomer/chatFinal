@@ -13,33 +13,80 @@
   <title>Mediator Page</title>
 </head>
 
+<style>
+  .larger-width-icon {
+    width: 1.5em;
+    /* Adjust the width as needed */
+  }
+</style>
+
 <body>
+  <header class="join-header">
+    <h1>Welcome back!</h1>
+  </header>
 
   <div class="join-container">
 
-    <header class="join-header">
-      <h1>Welcome back!</h1>
-    </header>
 
     <main class="join-main">
       <div class="form-control">
 
-        <button class="button button5" onclick="continueNegotiation()">Continue negotiation</button>
+        <button class="button nav-btn" onclick="continueNegotiation()">
+          <div class="left">
+            <i class="far fa-comment-dots"></i>
+            <span class="btn-txt">
+              Continue negotiation
+            </span>
+          </div>
+          <i class="fas fa-long-arrow-alt-right"></i>
+        </button>
 
-        <a href="../notifications/notifications.html">
-          <button class="button button5">Notifications</button>
+        <a href="../notifications/notifications.html" class="nav-btn">
+          <button class="button">
+              <div class="left">
+              <i class="far fa-bell"></i>
+              <span class="btn-txt">
+                Notifications
+              </span>
+            </div>
+            <i class="fas fa-long-arrow-alt-right"></i>
+            </button>
         </a>
 
-        <a href="/pages/negotiation/view-negotiations-summary/view-negotiations-summary.html">
-          <button class="button button5">View Negotiations Summaries </button>
+        <a href="/pages/negotiation/view-negotiations-summary/view-negotiations-summary.html" class="nav-btn">
+          <button class="button">
+              <div class="left">
+              <i class="far fa-sticky-note"></i>
+              <span class="btn-txt">
+                Negotiations Summaries
+              </span>
+            </div>
+            <i class="fas fa-long-arrow-alt-right"></i>
+            </button>
         </a>
 
-        <a href="../viewinsight/viewinsight.html">
-          <button class="button button5">View Insights </button>
+        <a href="../viewinsight/viewinsight.html" class="nav-btn">
+          <button class="button">
+              <div class="left">
+              <i class="far fa-lightbulb"></i>
+              <span class="btn-txt">
+                Insights
+              </span>
+            </div>
+            <i class="fas fa-long-arrow-alt-right"></i>
+            </button>
         </a>
 
-        <a href="../../contact-us/connect-us.html">
-          <button class="button button5">Contact Us</button>
+        <a href="../../contact-us/connect-us.html" class="nav-btn">
+          <button class="button">
+              <div class="left">
+              <i class="far fa-envelope-open"></i>
+              <span class="btn-txt">
+                Contact Us
+              </span>
+            </div>
+            <i class="fas fa-long-arrow-alt-right"></i>
+            </button>
         </a>
 
       </div>
@@ -47,7 +94,12 @@
     </main>
   </div>
 
-  <button class="logout_btn" onclick="logout()">Logout</button>
+  <button class="logout_btn" onclick="logout()">
+    <i class="fas fa-sign-out-alt"></i>
+    <span class="btn-txt">
+      Logout
+    </span>
+  </button>
 
   <script type="module" src="../homePage.js"></script>
 
