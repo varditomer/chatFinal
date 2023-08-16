@@ -114,13 +114,13 @@ CREATE TABLE `negotiation` (
 
 
 INSERT INTO `negotiation` ( `userCode1`, `userCode2`, `mediatorCode`, `topicCode`, `title`, `startTime`, `endTime`, `description`, `summary`) VALUES
-(17, 14, 2, 1, 'Stolen money', '2021-05-13 16:17:40', '2021-05-13 16:17:40', 'Anton works as a gardener for Nir and Nir suspects he stole from him', NULL),
+(17, 14, 2, 1, 'Stolen-money', '2021-05-13 16:17:40', '2021-05-13 16:17:40', 'Anton works as a gardener for Nir and Nir suspects he stole from him', NULL),
 (14, 15, 3, 2, 'Divorce', '2021-05-13 18:17:25', '2021-05-13 17:57:45', 'Coral and Anton have been married for 5 years and want to divorce', 'bidaokl'),
-(15, 13, 4, 2, 'Brothers conflict', '2021-05-13 07:34:57', NULL, 'Coral and David want to resolve dispute over inheritance', NULL),
-(16, 17, 6, 5, 'Friends conflict', '2021-05-13 07:36:17', '2021-04-19 08:21:11', 'Nir and Sapir want to go immigrate together but Sapir wants to fly to Greece while Nir wants to fly to USA', NULL),
-(17, 13, 2, 6, 'Money loan', '2021-05-12 18:58:01', NULL, 'David has borrowed money from Nir and cannot return the full amount on time', NULL),
-(17, 16, 1, 1, 'High school fight', '2021-05-11 21:31:04', NULL, 'David and Sapir are best friends who fall in love with the same girl', NULL),
-(2, 10, 5, 3, 'Work conflict', '2021-05-12 18:22:57', NULL, 'Coral and David work together and during the job David does not do his part', NULL);
+(15, 13, 4, 2, 'Brothers-conflict', '2021-05-13 07:34:57', NULL, 'Coral and David want to resolve dispute over inheritance', NULL),
+(16, 17, 6, 5, 'Friends-conflict', '2021-05-13 07:36:17', '2021-04-19 08:21:11', 'Nir and Sapir want to go immigrate together but Sapir wants to fly to Greece while Nir wants to fly to USA', NULL),
+(17, 13, 2, 6, 'Money-loan', '2021-05-12 18:58:01', NULL, 'David has borrowed money from Nir and cannot return the full amount on time', NULL),
+(17, 16, 1, 1, 'High-school-fight', '2021-05-11 21:31:04', NULL, 'David and Sapir are best friends who fall in love with the same girl', NULL),
+(2, 10, 5, 3, 'Work-conflict', '2021-05-12 18:22:57', NULL, 'Coral and David work together and during the job David does not do his part', NULL);
 
 
 

@@ -1,5 +1,3 @@
-import { userService } from "../../../services/user.service.js";
-
 function end() {
   var params = new URLSearchParams(url.search);
   var negoid = params.get("negoid");
@@ -61,6 +59,3 @@ function insti() {
       console.error("Fetch error:", error);
     });
 }
-
-window.goToHomePage = userService.goToHomePage;
-

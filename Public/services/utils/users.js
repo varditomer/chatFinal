@@ -2,7 +2,9 @@ const users=[];
 //join user to chat
 function userJoin(id,username,room){
     const user={id,username,room};
+    console.log(`user:`, user)
     users.push(user);
+    console.log(`users:`, users)
     return user;
 }
 
@@ -24,6 +26,8 @@ function getRoomUsers(room){
 
 //get current user
 function getCurrentUser(id){
+    console.log(`id:`, id)
+    console.log(`users:`, users)
     return users.find(user =>user.id ===id);
 }
 

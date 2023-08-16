@@ -1,6 +1,3 @@
-//const { disconnect } = require("mongoose");
-
-// const { userLeave } = require("../../utils/users");
 
 const chatForm = document.getElementById("chat-form");
 const chatMessages = document.querySelector(".chat-messages"); //for chesee which chat to talk
@@ -14,19 +11,19 @@ var params = new URLSearchParams(url.search);
 // console.log("🚀 ~ file: main.js ~ line 13 ~ params", params.get('title'),params.get('negoid'))
 
 var negoid = params.get("title");
-var usernamee = localStorage.getItem("username");
+var user = JSON.parse((localStorage.getItem("loggedInUser")));
+const username = user.username
+
 
 //Get usrname and room from url to know which in those room
-const username = usernamee;
 const room = negoid;
 
 //console.log(username,room); #check that it works
 
 const socket = io();
-
+console.log(`==================================:`,)
 //console.log(username,room); //print to the right web
 //join chatroom
-socket.emit("joinRoom", { username, room });
 
 //get room and users
 socket.on("roomUsers", ({ room, users }) => {
@@ -43,11 +40,17 @@ socket.on("message", ({ message, isSender, user }) => {
 });
 
 function onChatLoad() {
+  console.log(`5555555555555555:`,)
+  console.log(`user-from-storage:`, user)
+  console.log(`username:`, username)
+  socket.emit("joinRoom", { username, room });
+  console.log(`00000000000000000000000000:`,)
   console.log("hi");
   socket.emit("pageLoaded");
 }
+
 socket.on("pageLoad", ({ users }) => {
-  console.log(users);
+  console.log(`users:`, users)
   if (users) showList(users);
   //scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -106,6 +109,7 @@ function setUserElLi(typing, user) {
   isTypingEl.innerHTML = typing ? ".....typing" : "";
 }
 socket.on("isTyping", ({ typing, user }) => {
+  console.log(`11111:`,)
   setUserElLi(typing, user);
   console.log(
     "🚀 ~ file: main.js ~ line 111 ~ socket.on ~ typing",
@@ -125,8 +129,10 @@ socket.on("isNotTyping", ({ typing, user }) => {
 //msg submit
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
+  console.log(`e:`, e)
   //get message text
   const msg = e.target.elements.msg.value;
+  console.log(`msg:`, msg)
 
   const privateMsgTo = document.getElementById("userof").value;
   console.log(
@@ -209,57 +215,12 @@ function getuser() {
   return userList;
 }
 
-/* ------------------------------------ Click on login and Sign Up to  changue and view the effect
----------------------------------------
-*/
-
-// function cambiar_login() {
-//     document.querySelector(".cont_forms").className =
-//         "cont_forms cont_forms_active_login";
-//     document.querySelector(".cont_form_login").style.display = "block";
-//     document.querySelector(".cont_form_sign_up").style.opacity = "0";
-
-//     setTimeout(function () {
-//         document.querySelector(".cont_form_login").style.opacity = "1";
-//     }, 400);
-
-//     setTimeout(function () {
-//         document.querySelector(".cont_form_sign_up").style.display = "none";
-//     }, 200);
-// }
-
-// function cambiar_sign_up(at) {
-//     document.querySelector(".cont_forms").className =
-//         "cont_forms cont_forms_active_sign_up";
-//     document.querySelector(".cont_form_sign_up").style.display = "block";
-//     document.querySelector(".cont_form_login").style.opacity = "0";
-
-//     setTimeout(function () {
-//         document.querySelector(".cont_form_sign_up").style.opacity = "1";
-//     }, 100);
-
-//     setTimeout(function () {
-//         document.querySelector(".cont_form_login").style.display = "none";
-//     }, 400);
-// }
-
-// function ocultar_login_sign_up() {
-//     document.querySelector(".cont_forms").className = "cont_forms";
-//     document.querySelector(".cont_form_sign_up").style.opacity = "0";
-//     document.querySelector(".cont_form_login").style.opacity = "0";
-
-//     setTimeout(function () {
-//         document.querySelector(".cont_form_sign_up").style.display = "none";
-//         document.querySelector(".cont_form_login").style.display = "none";
-//     }, 500);
-// }
-
-const exitUser = document.getElementById("exitUser");
-exitUser.addEventListener("click", (e) => {
-  e.preventDefault();
+function leaveRoom(event) {
+  event.preventDefault();
   console.log("hi");
   socket.emit("userLeft", { username, room });
-});
+  window.location.href="../negotiation/continue-negotiation/continue-negotiation.html"
+}
 
 socket.on("redirectOut", ({ users, username }) => {
   console.log("bye");

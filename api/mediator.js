@@ -12,7 +12,6 @@ router.get("/approvedMed", (req, res) => {
     `SELECT username FROM user WHERE approved=? AND userType=?`,
     [isApproved, type],
     function (error, result) {
-      //console.log(JSON.stringify(result));
       res.send(result);
     }
   );

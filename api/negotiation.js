@@ -6,10 +6,11 @@ var nodemailer = require("nodemailer");
 
 router.post("/addNegotiation", async (req, res) => {
   try {
-    const { title, description } = req.body
+    let { title, description } = req.body
     const id1 = req.body.user1.userCode
     const phoneNumber = req.body.user2.phone
     let id2;
+    title = title.replace(' ', '-')
     const results = await new Promise((resolve, reject) => {
       db.query(
         "SELECT userCode FROM user WHERE phone = ?",
@@ -180,8 +181,6 @@ router.post("/addsummary", (req, res) => {
 
 router.post("/continueNegotiations", (req, res) => {
   const { userCode, userType } = req.body;
-  console.log(`userCode:`, userCode)
-  console.log(`userType:`, userType)
 
   if (userType === 'negotiator') {
     db.query(

@@ -1,5 +1,13 @@
 /* Chat Page */
 
+.body-chat {
+  display: unset;
+}
+
+.home_btn.chat {
+  margin-top: 10px;
+}
+
 .chat-container {
   /* max-width: 1100px; */
   width: 100%;
@@ -57,6 +65,7 @@
 .flex {
   display: flex;
 }
+
 .flex-col {
   flex-direction: column;
 }
@@ -91,6 +100,7 @@
   background: #e3e3e3;
   box-shadow: 0 0 8px rgba(102, 49, 255, 0.2);
 }
+
 .chat-messages {
   padding: 30px;
   height: 110%;
@@ -141,10 +151,12 @@
   padding: 5px 15px;
   font-size: 17px;
 }
+
 .send_btn:hover {
   background: #679eeb;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
+
 .chat-form-container form {
   display: flex;
 }

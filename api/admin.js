@@ -7,7 +7,6 @@ router.get("/query1", (req, res) => {
     `SELECT firstName,lastName,username, userType, phone ,education,proffesionalExperience FROM user WHERE userType!=? AND userCode!=? ORDER BY 4,2`,
     ["manager", 100],
     function (error, result) {
-      console.log(JSON.stringify(result));
       res.send(result);
     }
   );

@@ -143,7 +143,6 @@ router.post("/resetpass", (req, res) => {
 router.post("/checkUserExists", (req, res) => {
   const email = req.body.email;
   const username = req.body.username;
-  console.log(`req.body:`, req.body)
 
   // Query the database to check if a user with the given email or username already exists
   db.query(
@@ -181,7 +180,6 @@ router.get("/getOtherNegotiators/:username", (req, res) => {
         res.status(500).json({ message: "Error getting negotiators" });
       } else {
         const negotiators = results;
-        console.log(`negotiators:`, negotiators)
         res.json(negotiators);
       }
     }

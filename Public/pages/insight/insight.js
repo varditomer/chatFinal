@@ -1,4 +1,4 @@
-import { userService } from "../../services/user.service";
+import { userService } from "../../services/user.service.js";
 
 
 const yourUrl = "/api/insight/getInsights/";
