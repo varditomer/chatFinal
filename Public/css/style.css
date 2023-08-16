@@ -3,6 +3,7 @@
 @import './components/header.css';
 @import './pages/chat.css';
 @import './pages/join-page.css';
+@import './pages/contact-us.css';
 
 :root {
   --dark-color-a: #241387;
