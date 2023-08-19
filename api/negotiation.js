@@ -10,7 +10,7 @@ router.post("/addNegotiation", async (req, res) => {
     const id1 = req.body.user1.userCode
     const phoneNumber = req.body.user2.phone
     let id2;
-    title = title.replace(' ', '-')
+    title = title.trim().replace(' ', '-')
     const results = await new Promise((resolve, reject) => {
       db.query(
         "SELECT userCode FROM user WHERE phone = ?",
@@ -197,7 +197,6 @@ router.post("/continueNegotiations", (req, res) => {
       }
     );
   } else {
-    console.log(`userCode:`, userCode)
     db.query(
       `
       SELECT negoid, title, description, startTime, endTime
@@ -208,7 +207,6 @@ router.post("/continueNegotiations", (req, res) => {
       [userCode],
       function (error, result) {
         if (error) console.log(`error.message:`, error.message)
-        console.log(`result:`, result)
         res.send(result);
       }
     );

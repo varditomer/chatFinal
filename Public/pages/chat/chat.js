@@ -1,61 +1,56 @@
-function end() {
+// Function to end a negotiation
+function endConflict() {
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (loggedInUser.userType !== 'mediator') return
+  // Extract parameters from the URL query string
   var params = new URLSearchParams(url.search);
   var negoid = params.get("negoid");
-  const yourUrl = "/api/endnego";
-  const object1 = {
-    //put here relavent
 
+  // Define the URL for the API endpoint
+  const yourUrl = "/api/endnego";
+
+  // Create an object with relevant data to send in the request
+  const object1 = {
     negoid: negoid,
     name: localStorage.getItem("username"),
   };
-  var xhr = new XMLHttpRequest();
-  xhr.onload = function () {
-    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      if (xhr.responseText === "no") {
-        alert("You are not a mediator");
-      } else {
-        window.location.href = `../fidbecnego/fidbecnego.html?negoid=` + negoid;
-      }
-    }
-  };
-  xhr.open("POST", yourUrl, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify(object1));
-}
 
-
-function insti() {
-  const yourUrl = "/api/checkinsti";
-  const object1 = {
-    // Put your relevant properties here
-    name: localStorage.getItem("username")
-  };
-
+  // Use the Fetch API to send a POST request to the API
   fetch(yourUrl, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(object1)
+    body: JSON.stringify(object1),
   })
-    .then(response => {
+    .then((response) => {
       if (response.ok) {
         return response.text();
       } else {
         throw new Error("Network response was not ok.");
       }
     })
-    .then(responseText => {
+    .then((responseText) => {
       if (responseText === "no") {
         alert("You are not a mediator");
       } else {
-        const url = new URL(window.location.href);
-        const params = new URLSearchParams(url.search);
-        const negoid = params.get("negoid");
-        window.open(`../writeinsight/writeinsight.html?negoid=` + negoid);
+        // Redirect to a new page with the negotiation ID
+        window.location.href = `../fidbecnego/fidbecnego.html?negoid=` + negoid;
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.error("Fetch error:", error);
     });
 }
+
+
+// Function to write insights
+function wrightInsight() {
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  if (loggedInUser.userType !== 'mediator') return
+  return window.open(`../insight/write-insight/write-insight.html?negoid=` + negoid);
+}
+
+// Export the functions to make them accessible in the global window object
+window.end = end
+window.wrightInsight = wrightInsight

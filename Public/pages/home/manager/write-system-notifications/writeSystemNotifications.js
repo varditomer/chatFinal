@@ -1,28 +1,48 @@
 function goToHomePage() {
-  var userType = localStorage.getItem("userType");
+  const userType = JSON.parse(localStorage.getItem("loggedInUser")).userType;
   if (userType === "mediator") {
-    window.location.href = "../mediatorPage/mediatorPage.html";
+      window.location.href = "/pages/home/mediator/mediator-page.html";
   } else if (userType === "negotiator") {
-    window.location.href = "../negotiatorPage/negotiatorPage.html";
+      window.location.href = "/pages/home/negotiator/negotiator-page.html";
   } else if (userType === "manager") {
-    window.location.href = "../managerPage/managerPage.html";
+      window.location.href = "/pages/home/manager/manager-page.html";
   }
 }
 
-function sendnotifaiction() {
-  src = "https://smtpjs.com/v3/smtp.js";
-  const yourUrl = "http://localhost:3000/api/sendnotifaiction";
-  const object = {
-    //put here relavent
-    username: document.getElementById("username").value,
-    notification: document.getElementById("notification").value,
+
+
+function sendNotification() {
+  const yourUrl = "/api/notification/sendNotification";
+  const notificationDetails = {
+      username: document.getElementById("username").value,
+      notification: document.getElementById("notification").value,
   };
 
-  console.log(object);
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", yourUrl, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify(object));
-  alert("Your notification has been sent ");
-  window.location.href = "../managerPage/managerPage.html";
+  console.log(`notificationDetails:`, notificationDetails)
+
+
+  fetch(yourUrl, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify(notificationDetails),
+  })
+  .then(response => {
+      if (response.ok) {
+          return response.json();
+      } else {
+          throw new Error("Failed to send notification");
+      }
+  })
+  .then(data => {
+      console.log(data);
+      alert("Your notification has been sent");
+      window.location.href = "../manager-page.html";
+  })
+  .catch(error => {
+      console.error(error);
+      alert("An error occurred while sending the notification");
+  });
 }
+

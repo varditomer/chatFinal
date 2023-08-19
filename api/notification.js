@@ -4,8 +4,7 @@ const db = require("../services/db.service");
 var nodemailer = require("nodemailer");
 
 
-router.post("/sendnotifaiction", (req, res) => {
-  console.log(req.body.notification);
+router.post("/sendNotification", (req, res) => {
 
   db.query(
     `SELECT userCode FROM user WHERE username=?`,
@@ -13,7 +12,7 @@ router.post("/sendnotifaiction", (req, res) => {
     function (error, result) {
       //put if user not kaim
       db.query(
-        `INSERT INTO notifications (conent,UserCode) VALUES
+        `INSERT INTO notifications (content,UserCode) VALUES
     ('${req.body.notification}','${result[0].userCode}')`,
 
         function (error, result) { }

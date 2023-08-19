@@ -49,16 +49,16 @@
         <input type="password" name="password" id="password" placeholder="Enter your password..." required />
         <div id="error-password" class="error-message"></div>
       </div>
+      <label for="termsPrivacy">
+        <input type="checkbox" id="termsPrivacy" name="terms-privacy" required value="Terms">
+        By creating an account you agree to our
+        <a href="../termprivacy/termprivacy.html">Terms & Privacy</a>
+        <div id="error-terms" class="error-message"></div>
+      </label>
       <div class="bottom_part">
         <button type="submit" onclick="submit()" class="btn">Register</button>
       </div>
 
-      <label for="termsPrivacy">
-        <input type="checkbox" id="termsPrivacy" name="terms-privacy" required value="Terms">
-        By creating an account you agree to our
-        <a href="termprivacy.html">Terms & Privacy</a>
-        <div id="error-terms" class="error-message"></div>
-      </label>
       <div class="container signin">
         <p>Already have an account? <a href="../../../../index.html">Sign in</a>.</p>
       </div>
