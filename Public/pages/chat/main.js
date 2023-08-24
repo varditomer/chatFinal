@@ -187,6 +187,8 @@ socket.on("redirectOut", ({ users, username }) => {
   outputUsers(users);
 
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  console.log(`loggedInUser:`, loggedInUser)
+  console.log(`username:`, username)
   if (loggedInUser.username != username) return;
   window.location.href = "../negotiation/continue-negotiation/continue-negotiation.html";
 });

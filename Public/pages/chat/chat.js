@@ -3,8 +3,8 @@ function endConflict() {
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
   if (loggedInUser.userType !== 'mediator') return
   // Extract parameters from the URL query string
-  var params = new URLSearchParams(url.search);
-  var negoid = params.get("negoid");
+  const params = new URLSearchParams(url.search);
+  const negoid = params.get("negoid");
 
   // Define the URL for the API endpoint
   const yourUrl = "/api/endnego";
@@ -45,12 +45,13 @@ function endConflict() {
 
 
 // Function to write insights
-function wrightInsight() {
+function writeInsight() {
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
   if (loggedInUser.userType !== 'mediator') return
-  return window.open(`../insight/write-insight/write-insight.html?negoid=` + negoid);
+  console.log(`negoid:`, negoid)
+  return window.open(`../insight/write-insight/write-insight.html?negotiationTitle=` + negoid);
 }
 
 // Export the functions to make them accessible in the global window object
-window.end = end
-window.wrightInsight = wrightInsight
+window.endConflict = endConflict
+window.writeInsight = writeInsight

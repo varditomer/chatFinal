@@ -6,18 +6,15 @@ const loggedInUser = userService.getLoggedInUser();
 // Function to add a new negotiation
 function addNegotiation() {
   const yourUrl = "/api/negotiation/addNegotiation";
-  const phone = document.getElementById("phone").value;
 
   // Create the new negotiation data
   const newNegotiationData = {
-    user1: { userCode: loggedInUser.userCode },
-    user2: { phone },
+    userCode1: loggedInUser.userCode,
+    phone_user2: document.getElementById("phone").value,
     title: document.getElementById("title").value,
     description: document.getElementById("description").value,
+    topic: document.getElementById("topic").value,
   };
-
-  // Log the data
-  console.log(`newNegotiationData:`, newNegotiationData);
 
   // Create a new POST request using the fetch API
   fetch(yourUrl, {
@@ -41,36 +38,6 @@ function addNegotiation() {
       console.error("Fetch error:", error);
     });
 }
-
-// Function to populate the negotiators select dropdown
-function populateNegotiators(negotiators) {
-  const negotiatorSelect = document.getElementById("negotiator");
-
-  negotiators.forEach(negotiator => {
-    const option = document.createElement("option");
-    option.value = negotiator.username;
-    option.textContent = negotiator.username; // You can change this to display any relevant information
-    negotiatorSelect.appendChild(option);
-  });
-}
-
-// Fetch other negotiators and populate the select dropdown
-const negotiatorsUrl = `/api/auth/getOtherNegotiators/${loggedInUser.username}`;
-fetch(negotiatorsUrl, {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-  },
-})
-  .then(res => res.json())
-  .then(res => {
-    if (!res.error) {
-      populateNegotiators(res);
-    }
-  })
-  .catch(error => {
-    console.error("Fetch error:", error);
-  });
 
 // Function to populate the topics select dropdown
 function populateTopics(topics) {

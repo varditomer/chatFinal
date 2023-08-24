@@ -54,6 +54,7 @@ const notificationRouter = require("./api/notification");
 const emailRouter = require("./api/email");
 const mediatorRouter = require("./api/mediator");
 const expertiseRouter = require("./api/expertise");
+const insightRouter = require("./api/insight");
 
 // Use the imported API routers for specific routes
 app.use("/api/auth", authRouter);
@@ -62,6 +63,7 @@ app.use("/api/notification", notificationRouter);
 app.use("/api/email", emailRouter);
 app.use("/api/mediator", mediatorRouter);
 app.use("/api/expertise", expertiseRouter);
+app.use("/api/insight", insightRouter);
 
 // Define a chat bot name
 const botName = "Nego Bot";
@@ -230,16 +232,13 @@ io.on("connection", async (socket) => {
 
   // Handle when a user's chat page loads
   await socket.on("pageLoaded", () => {
-    console.log(`11111111111111111:`,)
     const user = getCurrentUser(socket.id);
-    console.log(`user:`, user)
     io.to(user.room).emit("pageLoad", { users: getRoomUsers(user.room) });
   });
 
   // Handle when a user leaves the chat
   await socket.on("userLeft", ({ username, room }) => {
     const user = userLeave(socket.id);
-    console.log(`user:`, user)
     if (user) {
       io.to(user.room).emit("message", {
         users: getRoomUsers(user.room),

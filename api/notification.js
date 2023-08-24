@@ -5,48 +5,19 @@ var nodemailer = require("nodemailer");
 
 
 router.post("/sendNotification", (req, res) => {
-
+console.log(`req:`, req.body)
   db.query(
     `SELECT userCode FROM user WHERE username=?`,
     [req.body.username],
     function (error, result) {
-      //put if user not kaim
+      console.log(`result:`, result)
+      console.log(`'${req.body.notification}','${result[0].userCode}':`, '${req.body.notification}','${result[0].userCode}')
       db.query(
-        `INSERT INTO notifications (content,UserCode) VALUES
+        `INSERT INTO notifications (content, UserCode) VALUES
     ('${req.body.notification}','${result[0].userCode}')`,
 
         function (error, result) { }
       );
-    }
-  );
-
-  db.query(
-    `SELECT email FROM user WHERE username=?`,
-    [req.body.username],
-    function (error, resi) {
-      var transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: "negoflict2555@gmail.com",
-          pass: "nidhbqdpouvypnhn",
-        },
-      });
-
-      var mailOptions = {
-        from: "negoflict2555@gmail.com",
-        to: `${resi[0].email}`,
-        form: "NegoFlict Support",
-        subject: "new notification",
-        text: "You have a new notification from NegoFlict system.",
-      };
-
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("Email sent: " + info.response);
-        }
-      });
     }
   );
 });

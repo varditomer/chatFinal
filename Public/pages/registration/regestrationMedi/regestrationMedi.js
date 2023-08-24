@@ -124,7 +124,6 @@ async function _isEmailOrUsernameExist(emailInput, usernameInput) {
 
 async function submit() {
   const isValidForm = await validateForm();
-  console.log(`isValidForm:`, isValidForm)
   if (isValidForm) {
     const yourUrl = "/api/auth/signupMedi";
     const userDetails = {
@@ -137,6 +136,7 @@ async function submit() {
       userType: "mediator",
       password: document.getElementById("password").value,
       professionalExperience: document.getElementById("ProfessionalDescription").value,
+      expertiseCode: document.getElementById("expertise").value
     };
     console.log(`userCredentials:`, userDetails);
 
@@ -161,4 +161,35 @@ async function submit() {
       });
   }
 }
+
+// Function to populate the expertise select dropdown
+function populateExpertise(expertise) {
+  console.log(`expertise:`, expertise)
+  const expertiseSelect = document.getElementById("expertise");
+
+  expertise.forEach(e => {
+    const option = document.createElement("option");
+    option.value = e.expertiseCode;
+    option.textContent = e.name;
+    expertiseSelect.appendChild(option);
+  });
+}
+
+// Fetch negotiation expertise and populate the select dropdown
+const topicsUrl = "/api/expertise/getExpertise";
+fetch(topicsUrl, {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
+  .then(res => res.json())
+  .then(res => {
+    if (!res.error) {
+      populateExpertise(res);
+    }
+  })
+  .catch(error => {
+    console.error("Fetch error:", error);
+  });
 

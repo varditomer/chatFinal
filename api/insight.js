@@ -1,3 +1,8 @@
+// api/insight.js
+const express = require("express");
+const router = express.Router();
+const db = require("../services/db.service");
+
 router.get("/getInsights", (req, res) => {
   db.query(
     `
@@ -11,21 +16,15 @@ router.get("/getInsights", (req, res) => {
 });
 
 router.post("/addInsight", (req, res) => {
+  const { username, title, content } = req.body
   db.query(
-    `SELECT mediatorCode, title FROM negotiation WHERE negoid=?`,
-    [req.body.negoid],
-    function (err, res1, fields) {
-      db.query(
-        `SELECT username FROM user WHERE userCode=?`,
-        [res1[0].mediatorCode],
-        function (err1, res2) {
-          db.query(
-            `INSERT INTO insight (username, title, content) VALUES
-              ('${res2[0].username}','${res1[0].title}', '${req.body.insight}')`,
-            function (error, result) { }
-          );
-        }
-      );
+    `INSERT INTO insight (username, title, content) 
+    VALUES (?, ?, ?)`,
+    [username, title, content],
+    function (error, result) {
+
     }
   );
 });
+
+module.exports = router;

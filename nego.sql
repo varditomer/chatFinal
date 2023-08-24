@@ -75,7 +75,6 @@ INSERT INTO `user` (`userCode`, `firstName`, `lastName`, `email`, `username`, `p
 (3, 'Bar', 'Pinto', 'barpinto@technion.ac.il', 'barp', '0506634891', 'Professional certificate', 'mediator', 'ba', 'Expert in immigration conflicts', 5, 1),
 (4, 'Anet', 'Shuminov', 'ashum@technion.ac.il', 'anets', '0523457779', 'University', 'mediator', 'as', 'Expert in labor and employment law', 3, 1),
 (5, 'Shir', 'Asa', 'shas@technion.ac.il', 'ashir', '0557835692', 'University', 'mediator', 'asd', 'Ten years experience in marriage mediation', 2, 0),
-(6, 'temp', 'temp', 'negoflict255@gmail.com', 'tempuser', '0542863848', 'no', 'mediator', '123', 'no', NULL, 0),
 
 (7, 'Mediator', 'One', 'mediator1@example.com', 'mediator1', '0542223333', 'Law School', 'mediator', 'mediator1pass', 'Experienced in civil disputes, including criminal law cases.', 1, 1),
 (8, 'Mediator', 'Two', 'mediator2@example.com', 'mediator2', '0544445555', 'Law School', 'mediator', 'mediator2pass', 'Specialized in property disputes, particularly real estate law.', 6, 1),
@@ -90,9 +89,6 @@ INSERT INTO `user` (`userCode`, `firstName`, `lastName`, `email`, `username`, `p
 (16, 'Sapir', 'Nir', 'sapir@gmail.com', 'nir', '0526839589', NULL, 'negotiator', '123456', NULL, NULL, 0),
 (17, 'Nir', 'Kaftori', 'nirkaf@gmail.com', 'kaftnir', '0507865554', NULL, 'negotiator', 'kaf2314', NULL, NULL, 0),
 (18, 'Ido', 'Jorno', 'ido15641@walla.com', 'idojorno', '0523144400', NULL, 'negotiator', '1234', NULL, NULL, 0);
-
-
-
 
 CREATE TABLE `negotiation` (
   `negoid` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -114,16 +110,13 @@ CREATE TABLE `negotiation` (
 
 
 INSERT INTO `negotiation` ( `userCode1`, `userCode2`, `mediatorCode`, `topicCode`, `title`, `startTime`, `endTime`, `description`, `summary`) VALUES
-(17, 14, 2, 1, 'Stolen-money', '2021-05-13 16:17:40', '2021-05-13 16:17:40', 'Anton works as a gardener for Nir and Nir suspects he stole from him', NULL),
-(14, 15, 3, 2, 'Divorce', '2021-05-13 18:17:25', '2021-05-13 17:57:45', 'Coral and Anton have been married for 5 years and want to divorce', 'bidaokl'),
-(15, 13, 4, 2, 'Brothers-conflict', '2021-05-13 07:34:57', NULL, 'Coral and David want to resolve dispute over inheritance', NULL),
-(16, 17, 6, 5, 'Friends-conflict', '2021-05-13 07:36:17', '2021-04-19 08:21:11', 'Nir and Sapir want to go immigrate together but Sapir wants to fly to Greece while Nir wants to fly to USA', NULL),
-(17, 13, 2, 6, 'Money-loan', '2021-05-12 18:58:01', NULL, 'David has borrowed money from Nir and cannot return the full amount on time', NULL),
-(17, 16, 1, 1, 'High-school-fight', '2021-05-11 21:31:04', NULL, 'David and Sapir are best friends who fall in love with the same girl', NULL),
-(2, 10, 5, 3, 'Work-conflict', '2021-05-12 18:22:57', NULL, 'Coral and David work together and during the job David does not do his part', NULL);
-
-
-
+(17, 14, 7, 1, 'Stolen-money', '2023-05-13 16:17:40', '2023-05-13 16:17:40', 'Anton works as a gardener for Nir and Nir suspects he stole from him', NULL),
+(14, 15, 2, 2, 'Divorce', '2023-05-13 18:17:25', '2023-05-13 17:57:45', 'Coral and Anton have been married for 5 years and want to divorce', 'bidaokl'),
+(15, 13, 5, 2, 'Brothers-conflict', '2023-05-13 07:34:57', NULL, 'Coral and David want to resolve dispute over inheritance', NULL),
+(16, 17, 3, 5, 'Friends-conflict', '2023-05-13 07:36:17', '2023-04-19 08:21:11', 'Nir and Sapir want to go immigrate together but Sapir wants to fly to Greece while Nir wants to fly to USA', NULL),
+(17, 13, 4, 3, 'Money-loan', '2023-05-12 18:58:01', NULL, 'David has borrowed money from Nir to his new business and cannot return the full amount on time', NULL),
+(17, 16, 5, 2, 'High-school-fight', '2023-05-11 21:31:04', NULL, 'David and Sapir are best friends who fall in love with the same girl', NULL),
+(2, 10, 4, 3, 'Work-conflict', '2023-05-12 18:22:57', NULL, 'Coral and David work together and during the job David does not do his part', NULL);
 
 CREATE TABLE `message` (
   `messageCode` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -144,31 +137,31 @@ CREATE TABLE `message` (
 
 INSERT INTO `message` (`messageCode`, `content`, `userCode`, `time`, `negoid`) 
 VALUES
-(10, 'Hey nir', 14, '2021-04-15 08:01:59', 1),
-(11, 'Hey Anton', 17, '2021-04-15 08:02:11', 1),
-(12, 'I really want to explain myself because i think there was a big cofusion', 14, '2021-04-17 11:45:01', 1),
-(13, 'Ok, im waitng to hear your side of the story', 17, '2021-04-17 11:45:08', 1),
-(14, 'Hey Anton', 15, '2021-04-17 12:12:57', 2),
-(15, 'Hey Coral', 14, '2021-04-17 12:13:20', 2),
-(16, 'Before you say something i just want to say that i love you and want  to try fix everything ', 14, '2021-04-17 12:13:22', 2),
-(17, 'I love you too, but im not sure that in the same way', 15, '2021-04-18 17:17:31', 2),
-(18, 'I want to divorce', 15, '2021-04-18 17:17:37', 2),
-(100, 'Hey Coral', 13, '2021-04-18 19:19:49', 3),
-(101, 'Im not sure im ready to talk with you yet, but lts try', 13, '2021-04-19 13:46:02', 3),
-(102, 'You dont want to speak with me?????', 15, '2021-04-22 07:49:06', 3),
-(103, 'You are the one that caused this situation!!! I hate you!!!!!!!!!!!!!!!!', 15, '2021-04-22 07:50:33', 3),
-(104, 'Hey Coral, lets try to use nicer words . we try to fix things not to destroy them.', 2, '2021-04-22 07:50:36', 3),
-(105, 'Hey Nir, this my bechelor party and i thinmk i should choose the location', 16, '2021-04-22 07:50:45', 4),
-(106, 'I agree, but i think it will be even better if it will be a suprise', 17, '2021-04-22 07:50:49', 4),
-(107, 'Im not sure we love the same type of vacations', 16, '2021-04-22 07:57:29', 4),
-(108, 'As my best frind i thought you will trust me more', 17, '2021-05-04 16:37:29', 4),
-(109, 'You are a liar!!! you promised ill get my money back on time!!!', 17, '2021-05-04 16:37:42', 5),
-(110, 'Hey i really want us to try keep using nice words to each other', 9, '2021-05-04 16:39:25', 5),
-(111, 'You always speak like that! thats why we cant have a normal conversation', 13, '2021-05-04 16:40:43', 5),
-(112, 'Im furious right now', 17, '2021-05-04 16:41:41', 5),
-(113, 'I cant believe you did this, you knew what she is for me', 13, '2021-05-04 16:42:43', 6),
-(114, 'What you want me to do? she love me', 16, '2021-05-04 16:43:56', 6),
-(115, 'I dont think we can fix things, im really mad at you', 15, '2021-05-04 16:44:09', 7);
+(10, 'Hey nir', 14, '2023-04-15 08:01:59', 1),
+(11, 'Hey Anton', 17, '2023-04-15 08:02:11', 1),
+(12, 'I really want to explain myself because i think there was a big cofusion', 14, '2023-04-17 11:45:01', 1),
+(13, 'Ok, im waitng to hear your side of the story', 17, '2023-04-17 11:45:08', 1),
+(14, 'Hey Anton', 15, '2023-04-17 12:12:57', 2),
+(15, 'Hey Coral', 14, '2023-04-17 12:13:20', 2),
+(16, 'Before you say something i just want to say that i love you and want  to try fix everything ', 14, '2023-04-17 12:13:22', 2),
+(17, 'I love you too, but im not sure that in the same way', 15, '2023-04-18 17:17:31', 2),
+(18, 'I want to divorce', 15, '2023-04-18 17:17:37', 2),
+(100, 'Hey Coral', 13, '2023-04-18 19:19:49', 3),
+(101, 'Im not sure im ready to talk with you yet, but lts try', 13, '2023-04-19 13:46:02', 3),
+(102, 'You dont want to speak with me?????', 15, '2023-04-22 07:49:06', 3),
+(103, 'You are the one that caused this situation!!! I hate you!!!!!!!!!!!!!!!!', 15, '2023-04-22 07:50:33', 3),
+(104, 'Hey Coral, lets try to use nicer words . we try to fix things not to destroy them.', 2, '2023-04-22 07:50:36', 3),
+(105, 'Hey Nir, this my bechelor party and i thinmk i should choose the location', 16, '2023-04-22 07:50:45', 4),
+(106, 'I agree, but i think it will be even better if it will be a suprise', 17, '2023-04-22 07:50:49', 4),
+(107, 'Im not sure we love the same type of vacations', 16, '2023-04-22 07:57:29', 4),
+(108, 'As my best frind i thought you will trust me more', 17, '2023-05-04 16:37:29', 4),
+(109, 'You are a liar!!! you promised ill get my money back on time!!!', 17, '2023-05-04 16:37:42', 5),
+(110, 'Hey i really want us to try keep using nice words to each other', 9, '2023-05-04 16:39:25', 5),
+(111, 'You always speak like that! thats why we cant have a normal conversation', 13, '2023-05-04 16:40:43', 5),
+(112, 'Im furious right now', 17, '2023-05-04 16:41:41', 5),
+(113, 'I cant believe you did this, you knew what she is for me', 13, '2023-05-04 16:42:43', 6),
+(114, 'What you want me to do? she love me', 16, '2023-05-04 16:43:56', 6),
+(115, 'I dont think we can fix things, im really mad at you', 15, '2023-05-04 16:44:09', 7);
 
 
 
@@ -190,9 +183,6 @@ VALUES
 (4, 17, 'Dont forget to fil all negotiation details', 0),
 (5, 5, 'Please check your negotiation last messages', 1),
 (6, 5, 'Please update your profile', 0);
-
-
-
 
 ALTER TABLE `negotiation`
   ADD CONSTRAINT `negotiation_ibfk_1` FOREIGN KEY (`userCode1`) REFERENCES `user` (`userCode`),

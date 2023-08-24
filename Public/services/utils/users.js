@@ -30,8 +30,6 @@ function userLeave(id) {
 function getRoomUsers(room) {
     // Filter the users array to get only users in the specified room
     const roomUsers = users.filter(user => user.room === room);
-    console.log(`99999999999999:`, )
-    console.log(`roomUsers:`, roomUsers)
     return roomUsers
 }
 

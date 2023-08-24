@@ -6,15 +6,13 @@ var nodemailer = require("nodemailer");
 
 router.post("/addNegotiation", async (req, res) => {
   try {
-    let { title, description } = req.body
-    const id1 = req.body.user1.userCode
-    const phoneNumber = req.body.user2.phone
-    let id2;
-    title = title.trim().replace(' ', '-')
+    let { userCode1, title, description, topic: topicCode, phone_user2 } = req.body;
+
+    // Find the userCode2 based on the provided phone number
     const results = await new Promise((resolve, reject) => {
       db.query(
         "SELECT userCode FROM user WHERE phone = ?",
-        [phoneNumber],
+        [phone_user2],
         (error, results, fields) => {
           if (error) {
             reject(error);
@@ -25,25 +23,64 @@ router.post("/addNegotiation", async (req, res) => {
       );
     });
 
-    if (results.length > 0) {
-      id2 = JSON.parse(JSON.stringify(results))[0].userCode;
-    } else {
+    if (results.length === 0) {
       res.status(404).json({
         error: "Phone num. isn't exist",
-        phoneNumber: phoneNumber,
+        phoneNumber: phone_user2,
       });
       return;
     }
 
-    // Get current timestamp in milliseconds
-    const timestamp = Date.now();
+    const userCode2 = results[0].userCode;
 
-    // Convert timestamp to MySQL datetime format ('YYYY-MM-DD HH:MM:SS')
-    const formattedStartTime = new Date(timestamp).toISOString().slice(0, 19).replace('T', ' ');
+    // Find a suitable mediator based on expertise and ongoing negotiations
+    const mediatorQuery = `
+    SELECT user.userCode, 
+    SUM(CASE WHEN neg.endTime IS NULL THEN 1 ELSE 0 END) AS numOpenNegotiations
+    FROM user
+    LEFT JOIN negotiation AS neg ON user.userCode = neg.mediatorCode
+    WHERE user.expertiseCode = ? AND user.approved = 1
+    GROUP BY user.userCode
+    ORDER BY numOpenNegotiations ASC
+    LIMIT 1
+    `;
 
-    await new Promise((resolve, reject) => {
+    const mediatorResults = await new Promise((resolve, reject) => {
       db.query(
-        `INSERT INTO negotiation (userCode1, userCode2, title, description, startTime) VALUES ('${id1}','${id2}','${title}','${description}' ,'${formattedStartTime}')`,
+        mediatorQuery,
+        [topicCode],
+        (error, results, fields) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(results);
+          }
+        }
+      );
+    });
+
+    if (mediatorResults.length === 0) {
+      res.status(404).json({
+        error: "No suitable mediator found for the topic",
+        topicCode: topicCode,
+      });
+      return;
+    }
+
+    const mediatorCode = mediatorResults[0].userCode;
+
+    // Get the current timestamp in MySQL datetime format ('YYYY-MM-DD HH:MM:SS')
+    const formattedStartTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+    // Insert the negotiation record
+    await new Promise((resolve, reject) => {
+      const insertQuery = `
+        INSERT INTO negotiation (userCode1, userCode2, mediatorCode, topicCode, title, description, startTime)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+      `;
+      db.query(
+        insertQuery,
+        [userCode1, userCode2, mediatorCode, topicCode, title, description, formattedStartTime],
         (error, result) => {
           if (error) {
             reject(error);
@@ -53,12 +90,14 @@ router.post("/addNegotiation", async (req, res) => {
         }
       );
     });
+
     res.status(200).json({ message: "Negotiation added" });
   } catch (error) {
     console.log(error);
-    res.send({error});
+    res.send({ error });
   }
 });
+
 
 router.post("/endNegotiation", (req, res) => {
   db.query(
