@@ -15,12 +15,10 @@
     <div class="chat-container">
         <header class="chat-header">
             <h1>NegoFlict</h1>
-
-            <center>
-                <a class="btn_leave" id="endNego" onclick="endConflict()">Mediator-End Conflict</a>
-                <a class="btn_leave" id="writeInsight" onclick="writeInsight()">Mediator-Write insight</a>
-                <a class="btn_leave" id="exitUser" onclick="leaveRoom(event)">Leave Room</a>
-            </center>
+            <div class="chat-btns">
+                <div class="mediator-btns" id="mediatorBtns"></div>
+                <a class="chat-btn" id="exitUser" onclick="leaveRoom(event)">Leave Room</a>
+            </div>
 
         </header>
         <main class="chat-main">

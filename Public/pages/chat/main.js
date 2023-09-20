@@ -11,6 +11,15 @@ var negoid = params.get("title");
 var user = JSON.parse(localStorage.getItem("loggedInUser"));
 const username = user.username;
 
+// Check the userType and conditionally render buttons
+if (user.userType === 'mediator') {
+  const mediatorBtns = document.getElementById("mediatorBtns")
+  mediatorBtns.innerHTML = `
+    <a class="chat-btn" id="writeInsight" onclick="writeInsight()">Mediator-Write insight</a>
+    <a class="chat-btn" id="endNego" onclick="endConflict()">Mediator-End Conflict</a>
+  `
+}
+
 // Set the room based on the URL parameter
 const room = negoid;
 

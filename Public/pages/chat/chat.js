@@ -7,21 +7,20 @@ function endConflict() {
   const negoid = params.get("negoid");
 
   // Define the URL for the API endpoint
-  const yourUrl = "/api/endnego";
+  const yourUrl = "/api/negotiation/endNegotiation";
 
   // Create an object with relevant data to send in the request
-  const object1 = {
+  const negotiationDetails = {
     negoid: negoid,
-    name: localStorage.getItem("username"),
   };
 
   // Use the Fetch API to send a POST request to the API
   fetch(yourUrl, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(object1),
+    body: JSON.stringify(negotiationDetails),
   })
     .then((response) => {
       if (response.ok) {
@@ -35,7 +34,7 @@ function endConflict() {
         alert("You are not a mediator");
       } else {
         // Redirect to a new page with the negotiation ID
-        window.location.href = `../fidbecnego/fidbecnego.html?negoid=` + negoid;
+        window.location.href = `../negotiation/feedback-negotiation/feedback-negotiation.html?negoid=` + negoid;
       }
     })
     .catch((error) => {

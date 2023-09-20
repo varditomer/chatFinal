@@ -1,4 +1,4 @@
-"use strict";
+
 
 function submit() {
   const yourUrl = "/api/addsummary";

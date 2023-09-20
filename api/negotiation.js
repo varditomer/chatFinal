@@ -99,25 +99,16 @@ router.post("/addNegotiation", async (req, res) => {
 });
 
 
-router.post("/endNegotiation", (req, res) => {
-  db.query(
-    `SELECT userType
-          FROM user
-          WHERE username=?`,
-    [req.body.name],
-    function (error, result0) {
-      if (result0[0].userType == "mediator") {
-        db.query(
-          `UPDATE negotiation SET endTime=current_timestamp() WHERE negoid=?`,
-          [req.body.negoid],
-          function (error, result) { }
-        );
-        res.send("b");
-      } else {
-        res.send("no");
-      }
-    }
-  );
+router.put("/endNegotiation", (req, res) => {
+  const query = `
+    UPDATE negotiation SET endTime=current_timestamp() WHERE negoid=?
+  `
+  const params = [req.body.negoid]
+  console.log(`params:`, params)
+  db.query(query, params, function (error, result) {
+    if (error) res.send('unable to end negotiation')
+    else res.send('negotiation ended successfully')
+  })
 });
 
 router.get("/viewNegotiations/:username", (req, res) => {
