@@ -1,35 +1,33 @@
-
-
-function submit() {
-  const yourUrl = "/api/addsummary";
-  let params = new URL(document.location).searchParams;
-  let negoid = params.get("negoid");
-  // const urlSearchParams = url.searchParams
-
-  // var params = new URLSearchParams(url.search);
-  //     var negoid = params.get("negoid");
+async function addSummary() {
+  const yourUrl = "/api/negotiation/addSummary";
+  var url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
+  const negoid = params.get("negoid");
   console.log(negoid);
-  const object = {
-    //put here relavent
 
+  const negotiationDetails = {
     negoid: negoid,
     summary: document.getElementById("summary").value,
   };
 
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", yourUrl, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify(object));
-  window.location.href = "../mediatorPage/mediatorPage.html";
-}
+  try {
+    const response = await fetch(yourUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(negotiationDetails)
+    });
 
-function goToHomePage() {
-  var userType = localStorage.getItem("userType");
-  if (userType === "mediator") {
-    window.location.href = "../mediatorPage/mediatorPage.html";
-  } else if (userType === "negotiator") {
-    window.location.href = "../negotiatorPage/negotiatorPage.html";
-  } else if (userType === "manager") {
-    window.location.href = "../managerPage/managerPage.html";
+    if (!response.ok) {
+      // handle HTTP-level error
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    window.location.href = "/pages/home/mediator/mediator-page.html";
+  } catch (error) {
+    console.error("There was a problem with the fetch:", error);
   }
 }
+
+window.addSummary = addSummary;

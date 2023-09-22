@@ -140,7 +140,7 @@ router.get("/query8/:username", (req, res) => {
     [username],
     function (error, result) {
       db.query(
-        `SELECT  mediatorCode, title, description, endTime, summary
+        `SELECT mediatorCode, title, description, endTime, summary
               FROM negotiation
               WHERE summary IS NOT NULL AND mediatorCode=?
               ORDER BY endTime`,
@@ -164,50 +164,67 @@ router.get("/viewNegotiation", (req, res) => {
   );
 });
 
-router.post("/addsummary", (req, res) => {
+router.post("/addSummary", (req, res) => {
   db.query(
     `UPDATE negotiation SET summary=? WHERE negoid=?`,
     [req.body.summary, req.body.negoid],
-    function (error, result) { }
-  );
-  db.query(
-    `SELECT userCode1, userCode2, title FROM negotiation WHERE negoid=?`,
-    [req.body.negoid],
-    function (err, res1) {
-      db.query(
-        `SELECT email FROM user WHERE userCode=? OR userCode=?`,
-        [res1[0].userCode1, res1[0].userCode2],
-        function (err, res) {
-          console.log(res);
-          var transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-              user: "negoflict2555@gmail.com",
-              pass: "nidhbqdpouvypnhn",
-            },
-          });
-
-          var mailOptions = {
-            from: "negoflict2555@gmail.com",
-            to: `${res[0].email}, ${res[1].email}`,
-            form: "NegoFlict Support",
-            subject: "Negotiation Summary",
-            text: `The mediator has submit a negotiation summary for negotiation ${res1[0].title} : ${req.body.summary}. 
-              BR, NegoFlict`,
-          };
-
-          transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-              console.log(error);
-            } else {
-              console.log("Email sent: " + info.response);
-            }
-          });
-        }
-      );
+    function (error, result) {
+      if (error) {
+        console.error('Database error:', error);
+        // Send a 500 Internal Server Error status code and a useful error message
+        return res.status(500).json({ error: 'Database error', details: error.message });
+      }
+      // Optionally, check if any rows were updated (optional)
+      if (result.affectedRows === 0) {
+        // Send a 404 Not Found status code if no rows were updated
+        return res.status(404).json({ error: 'No negotiation found with the given negoid' });
+      }
+      // If no error, send a 200 OK status code and a success message
+      res.status(200).json({ success: true, message: 'Summary updated successfully' });
     }
   );
 });
+
+
+// db.query(
+//   `SELECT userCode1, userCode2, title FROM negotiation WHERE negoid=?`,
+//   [req.body.negoid],
+//   function (err, res1) {
+
+
+// db.query(
+//   `SELECT email FROM user WHERE userCode=? OR userCode=?`,
+//   [res1[0].userCode1, res1[0].userCode2],
+//   function (err, res) {
+//     console.log(res);
+//     var transporter = nodemailer.createTransport({
+//       service: "gmail",
+//       auth: {
+//         user: "negoflict2555@gmail.com",
+//         pass: "nidhbqdpouvypnhn",
+//       },
+//     });
+
+//     var mailOptions = {
+//       from: "negoflict2555@gmail.com",
+//       to: `${res[0].email}, ${res[1].email}`,
+//       form: "NegoFlict Support",
+//       subject: "Negotiation Summary",
+//       text: `The mediator has submit a negotiation summary for negotiation ${res1[0].title} : ${req.body.summary}. 
+//         BR, NegoFlict`,
+//     };
+
+//     transporter.sendMail(mailOptions, function (error, info) {
+//       if (error) {
+//         console.log(error);
+//       } else {
+//         console.log("Email sent: " + info.response);
+//       }
+//     });
+// }
+// );
+// }
+// );
 
 router.post("/continueNegotiations", (req, res) => {
   const { userCode, userType } = req.body;
