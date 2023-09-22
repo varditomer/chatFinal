@@ -19,26 +19,40 @@ fetch(yourUrl, {
     const titles = userType === "mediator" ? ['Title', 'Start time', 'Negotiator 1', 'Negotiator 2', 'Description'] : ['Title', 'Start time', 'Mediator', 'Negotiator', 'Description']
 
     if (!negotiations.length) {
-      strHtml += `<h5>You have no new open negotiations</h5>`;
+      strHtml += `
+      <h5 style="display: flex; gap: 10px; align-items: center; font-size: 28px; justify-content: center;">
+      <i class="fas fa-gavel" style="color: red; text-decoration: line-through; text-decoration-color: black;"></i>
+        You have no new open negotiations
+      </h5>
+ 
+      `
+      ;
     }
     else {
-      strHtml += `<div class="row header">
-      <div key={title} class="cell">
-          ${titles[0]}
-      </div>
-      <div key={title} class="cell">
-          ${titles[1]}
-      </div>
-      <div key={title} class="cell">
-          ${titles[2]}
-      </div>
-      <div key={title} class="cell">
-          ${titles[3]}
-      </div>
-      <div key={title} class="cell">
-          ${titles[4]}
-      </div>
-      </div>`
+      strHtml += `
+        <h5 style="display: flex; gap: 10px; align-items: center; font-size: 28px; justify-content: center; margin-bottom: 20px">
+          <i class="fas fa-gavel"></i>
+          Select negotiation to continue
+        </h5>
+
+        <div class="row header">
+          <div key={title} class="cell">
+              ${titles[0]}
+          </div>
+          <div key={title} class="cell">
+              ${titles[1]}
+          </div>
+          <div key={title} class="cell">
+              ${titles[2]}
+          </div>
+          <div key={title} class="cell">
+              ${titles[3]}
+          </div>
+          <div key={title} class="cell">
+              ${titles[4]}
+          </div>
+        </div>
+      `
       negotiations.forEach((negotiation) => {
         console.log(negotiation);
         let { negoid, title } = negotiation;
