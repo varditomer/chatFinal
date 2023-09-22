@@ -67,7 +67,7 @@ fetch(yourUrl)
       strHtml +=
         `
         <div class="row">
-          <div class="cell" data-title=${titles[0]}>
+          <div style="font-weight:600;" class="cell" data-title=${titles[0]}>
             ${idx + 1}
           </div>
           <div class="cell" data-title=${titles[1]}>

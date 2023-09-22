@@ -53,7 +53,7 @@ fetch(yourUrl, {
         strHtml +=
           `
           <a class="row" href=/pages/chat/chat.html?negoid=${negoid}&title=${encodedTitle}>
-                            <div class="cell" data-title=${titles[0]}>
+                            <div style="font-weight:600;" class="cell" data-title=${titles[0]}>
                                 ${negotiation.title}
                             </div>
                             <div class="cell" data-title=${titles[1]}>
