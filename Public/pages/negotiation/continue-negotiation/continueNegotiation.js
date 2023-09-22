@@ -16,26 +16,70 @@ fetch(yourUrl, {
   .then((res) => {
     let strHtml = "";
     const negotiations = res;
+    const titles = userType === "mediator" ? ['Title', 'Start time', 'Negotiator 1', 'Negotiator 2', 'Description'] : ['Title', 'Start time', 'Mediator', 'Negotiator', 'Description']
+
+    // <div>
+    //   <a href=/pages/chat/chat.html?negoid=${negoid}&title=${title}>
+    //     ${title}
+    //   </a>
+    // </div>
 
     if (!negotiations.length) {
       strHtml += `<h5>You have no new open negotiations</h5>`;
     }
     else {
-      negotiations.forEach((obj) => {
-        let { negoid, title } = obj;
-        const encodedTitle = encodeURIComponent(title)
+      strHtml += `<div class="row header">
+      <div key={title} class="cell">
+          ${titles[0]}
+      </div>
+      <div key={title} class="cell">
+          ${titles[1]}
+      </div>
+      <div key={title} class="cell">
+          ${titles[2]}
+      </div>
+      <div key={title} class="cell">
+          ${titles[3]}
+      </div>
+      <div key={title} class="cell">
+          ${titles[4]}
+      </div>
+      </div>`
+      negotiations.forEach((negotiation) => {
+        console.log(negotiation);
+        let { negoid, title } = negotiation;
+        let user_name_to_render
+        if (userType === 'mediator') {
+          user_name_to_render = negotiation.user2_name
+        } else {
+          user_name_to_render = userCode === negotiation.userCode1 ? negotiation.user2_name : negotiation.user1_name
+        }
 
         strHtml +=
           `
-          <div>
-            <a href=/pages/chat/chat.html?negoid=${negoid}&title=${encodedTitle}>
-              ${title}
+          <a href=/pages/chat/chat.html?negoid=${negoid}&title=${title}>
+                    <div  class="row">
+                            <div class="cell" data-title=${titles[0]}>
+                                ${negotiation.title}
+                            </div>
+                            <div class="cell" data-title=${titles[1]}>
+                                ${(negotiation.startTime).substring(0, 10)} ${(negotiation.startTime).substring(11, 16)}
+                            </div>
+                            <div class="cell capitalize" data-title=${titles[2]}>
+                                ${userType === 'mediator' ? negotiation.user1_name : negotiation.mediator_name}
+                            </div>
+                            <div class="cell" data-title=${titles[3]}>
+                                ${user_name_to_render}
+                            </div>
+                            <div class="cell capitalize" data-title=${titles[4]}>
+                                       ${negotiation.description}  
+                             </div>
+                        </div>
             </a>
-          </div>
-        `;
+`
       });
     }
-    document.getElementById("data").innerHTML = strHtml;
+    document.querySelector(".custom-table").innerHTML = strHtml;
 
   });
 
