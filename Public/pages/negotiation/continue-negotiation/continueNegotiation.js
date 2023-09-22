@@ -18,12 +18,6 @@ fetch(yourUrl, {
     const negotiations = res;
     const titles = userType === "mediator" ? ['Title', 'Start time', 'Negotiator 1', 'Negotiator 2', 'Description'] : ['Title', 'Start time', 'Mediator', 'Negotiator', 'Description']
 
-    // <div>
-    //   <a href=/pages/chat/chat.html?negoid=${negoid}&title=${title}>
-    //     ${title}
-    //   </a>
-    // </div>
-
     if (!negotiations.length) {
       strHtml += `<h5>You have no new open negotiations</h5>`;
     }
@@ -58,8 +52,7 @@ fetch(yourUrl, {
 
         strHtml +=
           `
-          <a href=/pages/chat/chat.html?negoid=${negoid}&title=${encodedTitle}>
-                    <div  class="row">
+          <a class="row" href=/pages/chat/chat.html?negoid=${negoid}&title=${encodedTitle}>
                             <div class="cell" data-title=${titles[0]}>
                                 ${negotiation.title}
                             </div>
@@ -75,7 +68,6 @@ fetch(yourUrl, {
                             <div class="cell capitalize" data-title=${titles[4]}>
                                        ${negotiation.description}  
                              </div>
-                        </div>
             </a>
 `
       });
