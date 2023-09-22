@@ -233,10 +233,16 @@ router.post("/continueNegotiations", (req, res) => {
   if (userType === 'negotiator') {
     db.query(
       `
-      SELECT negoid, title, description, startTime, endTime
-      FROM negotiation
-      WHERE endTime IS NULL AND userCode1=? OR endTime IS NULL AND userCode2=?
-      ORDER BY startTime
+      SELECT n.negoid, n.title, n.description, n.startTime, n.endTime,
+      CONCAT(u1.firstName, ' ', u1.lastName) AS user1_name, u1.userCode AS userCode1,
+      CONCAT(u2.firstName, ' ', u2.lastName) AS user2_name, u2.userCode AS userCode2,
+      CONCAT(m.firstName, ' ', m.lastName) AS mediator_name, m.userCode AS mediatorCode
+FROM negotiation AS n
+LEFT JOIN user AS u1 ON n.userCode1 = u1.userCode
+LEFT JOIN user AS u2 ON n.userCode2 = u2.userCode
+LEFT JOIN user AS m ON n.mediatorCode = m.userCode
+WHERE endTime IS NULL AND userCode1=? OR endTime IS NULL AND userCode2=?
+ORDER BY n.startTime;
     `,
       [userCode, userCode],
       function (error, result) {
