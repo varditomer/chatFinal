@@ -103,16 +103,8 @@
 }
 
 .row .remove-btn:hover {
-    background-color: var(--accent);
+    background-color: var(--light-color);
     color: white;
-}
-
-@media screen and (min-width:650px) {
-    .row .remove-btn {
-        /* padding: 4px 8px; */
-        /* height: unset; */
-        /* width: unset; */
-    }
 }
 
 @media screen and (min-width:760px) {
