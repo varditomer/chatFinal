@@ -48,6 +48,7 @@ fetch(yourUrl, {
       negotiations.forEach((negotiation) => {
         console.log(negotiation);
         let { negoid, title } = negotiation;
+        const encodedTitle = encodeURIComponent(title);  // Encodes special characters and spaces in the title string for use in a URL
         let user_name_to_render
         if (userType === 'mediator') {
           user_name_to_render = negotiation.user2_name
@@ -57,7 +58,7 @@ fetch(yourUrl, {
 
         strHtml +=
           `
-          <a href=/pages/chat/chat.html?negoid=${negoid}&title=${title}>
+          <a href=/pages/chat/chat.html?negoid=${negoid}&title=${encodedTitle}>
                     <div  class="row">
                             <div class="cell" data-title=${titles[0]}>
                                 ${negotiation.title}
