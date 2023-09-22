@@ -24,71 +24,61 @@
     <main class="join-main">
 
       <div class="form-control">
-        <ul>
-          <li>
-            <div class="input-box padding_hf">
-              <label for="firstname">First Name:</label>
-              <input placeholder="Enter first name..." type="text" class="input-text required-entry " title="firstname"
-                id="firstname" name="options[2]" value="">
-              <div id="error-firstname" class="error-message"></div>
-            </div>
-          </li>
+        <div>
+          <label for="firstName">First Name</label>
+          <input placeholder="Enter first name..." type="text" class="input-text required-entry " title="first-name"
+            id="firstName" name="options[2]" value="">
+          <div id="error-firstname" class="error-message"></div>
+        </div>
 
-          <li>
-            <div class="input-box padding_hf">
-              <label for="lastname">Last Name:</label>
-              <input placeholder="Enter last name..." type="text" class="input-text required-entry " title="lastname"
-                id="lastname" name="options[3]" value="">
-              <div id="error-lastname" class="error-message"></div>
-            </div>
-          </li>
+        <div>
+          <label for="lastName">Last Name</label>
+          <input placeholder="Enter last name..." type="text" class="input-text required-entry " title="last-name"
+            id="lastName" name="options[3]" value="">
+          <div id="error-lastname" class="error-message"></div>
+        </div>
 
-          <li>
-            <div class="input-box padding_hf">
-              <label for="mail">Email:</label>
-              <input placeholder="Enter email..." type="text" class="input-text validate-email  required-entry"
-                title="mail" id="mail" name="options[4]" value="">
-              <div id="error-email" class="error-message"></div>
-            </div>
-          </li>
-          <li>
-            <div class="input-box padding_hf">
-              <label for="phone">Phone:</label>
-              <input placeholder="Enter phone..." type="text" class="input-text  validate-phoneStrict" title="phone"
-                id="phone" name="options[5]" maxlength="10" value="">
-              <div id="error-phone" class="error-message"></div>
-            </div>
-          </li>
+        <div>
+          <label for="mail">Email</label>
+          <input placeholder="Enter email..." type="text" class="input-text validate-email  required-entry" title="mail"
+            id="mail" name="options[4]" value="">
+          <div id="error-email" class="error-message"></div>
+        </div>
 
-          <div class="form-control">
-            <label for=Subject>Subject</label>
-            <select id="Subject">
-              <option value="Technical">Technical</option>
-              <option value="Privacy">Privacy</option>
-              <option value="Dissatisfaction">Dissatisfaction</option>
-              <option value="Other">Other</option>
-            </select>
-            <div id="error-subject" class="error-message"></div>
-          </div>
-          <li>
-            <div class="input-box padding_hf">
-            </div>
-          </li>
-          <li>
-            <div class="input-box padding_hf">
-              <label for="description">Desctiption:</label>
-              <textarea placeholder="Enter your description..." style=color:black rows="8" cols="57"
-                class="join-container" title="description" id="description" name=description></textarea>
-              <div id="error-description" class="error-message"></div>
-            </div>
-            <div class="buttons-set padding_hf"> <br><br>
-              <input type="hidden" name="form_id" id="form_id" value="1">
-              <button type="submit" onclick="sendEmail()" class="btn">Send</button>
-            </div>
-          </li>
-        </ul>
+        <div>
+          <label for="phone">Phone</label>
+          <input placeholder="Enter phone..." type="text" class="input-text  validate-phoneStrict" title="phone"
+            id="phone" name="options[5]" maxlength="10" value="">
+          <div id="error-phone" class="error-message"></div>
+        </div>
+
+        <div>
+          <label for=subject>Subject</label>
+          <select id="subject">
+            <option value="Technical">Technical</option>
+            <option value="Privacy">Privacy</option>
+            <option value="Dissatisfaction">Dissatisfaction</option>
+            <option value="Other">Other</option>
+          </select>
+          <div id="error-subject" class="error-message"></div>
+        </div>
+
+        <div>
+          <label for="description">description</label>
+          <textarea placeholder="Enter your description..." style=color:black rows="8" cols="57" class="join-container"
+            title="description" id="description" name=description></textarea>
+          <div id="error-description" class="error-message"></div>
+        </div>
+
+        <div class="buttons-set"> <br><br>
+          <input type="hidden" name="form_id" id="form_id" value="1">
+          <button type="submit" onclick="sendEmail()" class="btn">Send</button>
+        </div>
+
       </div>
+
     </main>
+
   </div>
 
   <button class="home_btn" onclick="goToHomePage()">

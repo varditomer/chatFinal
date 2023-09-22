@@ -21,39 +21,38 @@
   <div class="join-container">
     <main class="join-main">
       <div class="form-control">
-        <label for="Title">Negotiation title</label>
-        <input type="text" name="title" id="title" placeholder="Enter negotiation title..." required />
+        <div style="width: 100%;">
+          <label for="title">Negotiation title</label>
+          <input type="text" name="title" id="title" placeholder="Enter negotiation title..." required />
+        </div>
+
+        <div style="width: 100%;">
+          <label for="topic">negotiation topic</label>
+          <select name="topic" id="topic" required>
+            <!-- Options will be populated dynamically using JavaScript -->
+          </select>
+        </div>
+
+        <div style="width: 100%;">
+          <label for="phone">negotiation partner name or phone number</label>
+          <input type="text" name="phone" id="phone" placeholder="Enter name or phone number..." required />
+        </div>
+
+        <div style="width: 100%;">
+          <label for="description">negotiation description</label>
+          <textarea placeholder="Enter negotiation description..." rows="8"
+            class="join-container" title="description" id="description" name="options[8]"></textarea>
+        </div>
+
+        <button type="submit" onclick="addNegotiation()" class="btn">
+          Create negotiation
+        </button>
+
       </div>
-
-      <div class="form-control">
-        <label for="topic">Select negotiation topic</label>
-        <select name="topic" id="topic" required>
-          <!-- Options will be populated dynamically using JavaScript -->
-        </select>
-      </div>
-
-      <div class="form-control">
-        <label for="phone">Enter negotiation partner phone number</label>
-        <input
-          type="text"
-          name="phone"
-          id="phone"
-          placeholder="Enter phone number..."
-          required
-        />
-
-      <div class="form-control">
-        <textarea placeholder=" Enter negotiation description..." style="color: black" rows="8" cols="57"
-          class="join-container" title="description" id="description" name="options[8]"></textarea>
-      </div>
-
-      <button type="submit" onclick="addNegotiation()" class="btn">
-        Create negotiation
-      </button>
 
     </main>
   </div>
-  
+
   <button class="home_btn" onclick="goToHomePage()">
     <i class="fas fa-hand-point-left"></i>
     <span class="btn-txt">

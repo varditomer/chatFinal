@@ -4,9 +4,9 @@ import { userService } from '../../services/user.service.js'
 const loggedInUser = userService.getLoggedInUser()
 
 
-document.getElementById("Subject").value = ''
-document.getElementById("firstname").value = loggedInUser.firstName
-document.getElementById("lastname").value = loggedInUser.lastName
+document.getElementById("subject").value = ''
+document.getElementById("firstName").value = loggedInUser.firstName
+document.getElementById("lastName").value = loggedInUser.lastName
 document.getElementById("mail").value = loggedInUser.email
 document.getElementById("phone").value = loggedInUser.phone
 

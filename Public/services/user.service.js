@@ -42,7 +42,7 @@ function login() {
             }
         })
         .catch(error => {
-            console.error("Fetch error:", error); // Handle any fetch errors
+            document.getElementById('message').innerText = error.message
         });
 }
 

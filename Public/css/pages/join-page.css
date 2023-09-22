@@ -7,7 +7,7 @@
 }
 
 .join-container.login {
-  width: 40%;
+  max-width: 600px;
 }
 
 .join-container.login h1 {
@@ -31,6 +31,9 @@
   align-items: center;
   width: 100%;
 }
+.join-main .form-control div {
+  width: 100%;
+}
 
 .join-main .form-control.login {
   gap: 6px;
@@ -40,7 +43,7 @@
 
 .join-main label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   color: #4f4f4f;
 }
 
@@ -48,36 +51,43 @@
   align-self: start;
 }
 
-.join-main input[type="text"] {
+.join-main input,
+.join-main select,
+.join-main textarea {
   font-size: 16px;
-  padding: 5px;
   height: 40px;
   width: 100%;
   outline: none;
-  padding: 5px;
+  padding: 8px;
   border: none;
   border-radius: 5px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
-.join-main input[type="text"]:focus {
-  outline: #679eeb 1px solid;
-}
-
-.join-main input[type="password"] {
+.join-main input::placeholder,
+.join-main select::placeholder,
+.join-main textarea::placeholder {
   font-size: 16px;
-  padding: 5px;
-  height: 40px;
-  width: 100%;
-  outline: none;
-  padding: 5px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  font-family: monospace;
+  color: var(--light-color);
 }
 
-.join-main input[type="password"]:focus {
+.join-main textarea {
+  height: unset;
+}
+
+.join-main input:focus,
+.join-main select:focus,
+.join-main textarea:focus {
   outline: #679eeb 1px solid;
+}
+
+.form-control label {
+  letter-spacing: 1.3px;
+  font-weight: 600;
+  font-size: 18px;
+  text-transform: capitalize;
+  /* margin-bottom: 3px; */
 }
 
 .text_strong {
