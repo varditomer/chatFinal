@@ -23,11 +23,12 @@ fetch(yourUrl, {
     else {
       negotiations.forEach((obj) => {
         let { negoid, title } = obj;
+        const encodedTitle = encodeURIComponent(title)
 
         strHtml +=
           `
           <div>
-            <a href=/pages/chat/chat.html?negoid=${negoid}&title=${title}>
+            <a href=/pages/chat/chat.html?negoid=${negoid}&title=${encodedTitle}>
               ${title}
             </a>
           </div>

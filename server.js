@@ -103,6 +103,7 @@ io.on("connection", async (socket) => {
     // Load message history from the database and send it to the user
     // const history = [];
     console.log(`🚀 ~ Loading Chat History for new room's user..`);
+    console.log(`user.room:`, user.room)
     db.query(`SELECT negoid FROM negotiation WHERE title=?`,
       [user.room],
       function (err, res) {
