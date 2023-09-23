@@ -12,7 +12,7 @@ fetch(yourUrl)
 
         <h5 style="display: flex; gap: 10px; align-items: center; font-size: 28px; justify-content: center; margin-bottom: 20px">
           <i class="fas fa-user-check"></i>
-          Unassigned negotiations
+          Assign mediator
         </h5>
 
             <table border="6" style="margin-left:auto; font-size:15px; margin-right:auto;">
