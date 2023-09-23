@@ -3,39 +3,63 @@
 import { userService } from "../../../../services/user.service.js";
 
 const yourUrl = "/api/mediator/getUnapprovedMediators";
-
+const titles = ['First Name', 'Last Name', 'User Name', 'Education', 'Professional Experience', '']
 fetch(yourUrl)
   .then((res) => res.json())
   .then((res) => {
     var strHtml = "";
     strHtml += /*html*/ `
-            <table border="6" style="margin-left:auto; font-size:15px; margin-right:auto;">
-              <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>User Name</th>
-                <th>Education</th>
-                <th>Professional Experience</th>
-              </tr>
+
+              <div class="row header">
+              <div class="cell">
+                  ${titles[0]}
+              </div>
+              <div class="cell">
+                  ${titles[1]}
+              </div>
+              <div class="cell">
+                  ${titles[2]}
+              </div>
+              <div class="cell">
+                  ${titles[3]}
+              </div>
+              <div class="cell">
+                  ${titles[4]}
+              </div>
+              <div class="cell">
+                  ${titles[5]}
+              </div>
+            </div>
+
               `;
 
     var unApprovedMediators = res;
     unApprovedMediators.forEach((mediator) => {
       const { firstName, lastName, username, education, professionalExperience } = mediator;
       strHtml += /*html*/ `
-            <tr>
-              <td>${firstName} </td>           
-              <td>${lastName}</td>
-              <td> ${username}</td>
-              <td>${education}</td>
-              <td>${professionalExperience}</td>
-              <td>
-                <center>
-                  <button type="submit" class="btn" style="color:white" onclick="approveMediator('${mediator.username}');">Approve</button>
-                </center>
-              </td>
-            </tr>
-              `;
+   <div class="row">
+   <div style="font-weight:600;color:black" class="cell" data-title=${titles[0]}>
+     ${firstName}
+   </div>
+   <div style="color:black"   class="cell" data-title=${titles[1]}>
+     ${lastName}
+   </div>
+   <div style="color:black"  class="cell capitalize" data-title=${titles[2]}>
+    ${username}
+   </div>
+   <div style="color:black"  class="cell" data-title=${titles[3]}>
+     ${education}
+   </div>
+   <div style="color:black" class="cell capitalize" data-title=${titles[4]}>
+     ${professionalExperience}  
+   </div>
+   <div style="color:black"  class="cell">
+     <button type="submit" class="btn" style="color:white;height:40px" onclick="approveMediator('${mediator.username}');">Approve</button>
+   </div>
+</div>
+
+
+`;
     });
 
     //console.log(strHtml);
