@@ -1,12 +1,7 @@
-.insights-container{
-    display: flex;
-    flex-direction: column;
-    padding: 0 20px;
-    gap: 20px;
-    width: 100%;
+.insights-container a {
+    margin-bottom: 20px;
 }
 
-.insights-container button{
-    max-width: 200px;
-    align-self: center;
+.home-btn-container{
+    width: 100%;
 }

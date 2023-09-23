@@ -19,77 +19,78 @@
     <main class="join-main">
       <script defer src="./regestrationMedi.js"></script>
       <div class="form-control">
-        <label for="firstname">First Name</label>
-        <input type="text" name="firstname" id="firstname" placeholder="Enter your firstname..." required />
-        <div id="error-firstname" class="error-message"></div>
-      </div>
-      <div class="form-control">
-        <label for="lastname">Last Name</label>
-        <input type="text" name="lastname" id="lastname" placeholder="Enter your lastname..." required />
-        <div id="error-lastname" class="error-message"></div>
-      </div>
-      <div class="form-control">
-        <label for="phone">Phone</label>
-        <input type="text" name="Phone" id="Phone" placeholder="Enter your phone number..." required maxlength="10" />
-        <div id="error-phone" class="error-message"></div>
-      </div>
-      <div class="form-control">
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" placeholder="Enter your email..." required />
-        <div id="error-email" class="error-message"></div>
-      </div>
-      <div class="form-control">
-        <label for="email">Username</label>
-        <input type="text" name="username" id="username" placeholder="Enter your username..." required />
-        <div id="error-username" class="error-message"></div>
-      </div>
-      <div class="form-control">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" placeholder="Enter your password..." required />
-        <div id="error-password" class="error-message"></div>
+
+        <div class="">
+          <label for="firstname">First Name</label>
+          <input type="text" name="firstname" id="firstname" placeholder="Enter your firstname..." required />
+          <div id="error-firstname" class="error-message"></div>
+        </div>
+        <div class="">
+          <label for="lastname">Last Name</label>
+          <input type="text" name="lastname" id="lastname" placeholder="Enter your lastname..." required />
+          <div id="error-lastname" class="error-message"></div>
+        </div>
+        <div class="">
+          <label for="phone">Phone</label>
+          <input type="text" name="Phone" id="Phone" placeholder="Enter your phone number..." required maxlength="10" />
+          <div id="error-phone" class="error-message"></div>
+        </div>
+        <div class="">
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email" placeholder="Enter your email..." required />
+          <div id="error-email" class="error-message"></div>
+        </div>
+        <div class="">
+          <label for="email">Username</label>
+          <input type="text" name="username" id="username" placeholder="Enter your username..." required />
+          <div id="error-username" class="error-message"></div>
+        </div>
+        <div class="">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="Enter your password..." required />
+          <div id="error-password" class="error-message"></div>
+        </div>
+
+        <div class="">
+          <label for=education>Education</label>
+          <select name="education" id="education">
+            <option value="University">University</option>
+            <option value="Professional certificate">Professional certificate</option>
+          </select>
+        </div>
+        <div class="">
+          <label for="text">Describe your professional experience</label>
+          <input type="text" placeholder="Enter your professional experience..." name="ProfessionalDescription"
+            id="ProfessionalDescription" required><br>
+          <div id="error-experience" class="error-message"></div>
+        </div>
+        <div class="">
+          <label for="topic">Select your expertise:</label>
+          <select name="expertise" id="expertise" required>
+            <!-- Options will be populated dynamically using JavaScript -->
+          </select>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <div style="display: flex;align-items: center;gap: 10px;">
+            <input style="box-shadow: none; display: flex;flex-direction: column; width:20px;" type="checkbox" id="termsPrivacy"
+              name="terms-privacy" required value="Terms">
+            <p style="color: black;">By creating an account you agree to our</p>
+            <a href="../termprivacy/termprivacy.html">Terms & Privacy</a>
+          </div>
+          <div id="error-terms" class="error-message"></div>
+        </div>
+        <div class="bottom_part">
+          <button type="submit" onclick="submit()" class="btn">Register</button></a>
+        </div>
+        <div class="container signin">
+          <p>Already have an account? <a href="../../../../index.html">Sign in</a>.</p>
+        </div>
       </div>
 
-      <div class="form-control">
-        <label for=education>Education</label>
-        <select name="education" id="education">
-          <option value="University">University</option>
-          <option value="Professional certificate">Professional certificate</option>
-        </select>
-      </div>
-
-      <div class="form-control">
-        <label for="text">Describe your professional experience</label>
-        <input type="text" placeholder="Enter your professional experience..." name="ProfessionalDescription"
-          id="ProfessionalDescription" required><br>
-        <div id="error-experience" class="error-message"></div>
-      </div>
-
-      <div class="form-control">
-        <label for="topic">Select your expertise:</label>
-        <select name="expertise" id="expertise" required>
-          <!-- Options will be populated dynamically using JavaScript -->
-        </select>
-      </div>
-
-      <label for="termsPrivacy">
-        <input type="checkbox" id="termsPrivacy" name="terms-privacy" required value="Terms">
-        By creating an account you agree to our
-        <a href="../termprivacy/termprivacy.html">Terms & Privacy</a>
-        <div id="error-terms" class="error-message"></div>
-      </label>
-
-      <div class="bottom_part">
-        <button type="submit" onclick="submit()" class="btn">Register</button></a>
-      </div>
-
-
-      <div class="container signin">
-        <p>Already have an account? <a href="../../../../index.html">Sign in</a>.</p>
-      </div>
     </main>
   </div>
 
-  <a href="../registration.html">
+  <a class="home-btn-container" href="../registration.html">
     <button class="home_btn">
       <i class="fas fa-hand-point-left"></i>
       <span class="btn-txt">
