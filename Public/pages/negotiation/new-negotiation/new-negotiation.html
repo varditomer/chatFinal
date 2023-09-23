@@ -28,9 +28,14 @@
 
         <div style="width: 100%;">
           <label for="topic">negotiation topic</label>
-          <select name="topic" id="topic" required>
+          <select name="topic" id="topic" required onchange="handleTopicChange()">
             <!-- Options will be populated dynamically using JavaScript -->
           </select>
+        </div>
+
+        <div style="width: 100%;" id="otherTopicDiv" hidden>
+          <label for="otherTopic">Negotiation Topic Description</label>
+          <input type="text" name="otherTopic" id="otherTopic" placeholder="Describe the negotiation topic..." />
         </div>
 
         <div style="width: 100%;">
@@ -40,8 +45,8 @@
 
         <div style="width: 100%;">
           <label for="description">negotiation description</label>
-          <textarea placeholder="Enter negotiation description..." rows="8"
-            class="join-container" title="description" id="description" name="options[8]"></textarea>
+          <textarea placeholder="Enter negotiation description..." rows="8" class="join-container" title="description"
+            id="description" name="options[8]" style="color: black;"></textarea>
         </div>
 
         <button type="submit" onclick="addNegotiation()" class="btn">

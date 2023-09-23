@@ -6,22 +6,22 @@ var nodemailer = require("nodemailer");
 
 router.post("/addNegotiation", async (req, res) => {
   try {
-    let { userCode1, title, description, topic: topicCode, phone_user2 } = req.body;
-
-    // Find the userCode2 based on the provided phone number
-    const results = await new Promise((resolve, reject) => {
-      db.query(
-        "SELECT userCode FROM user WHERE phone = ?",
-        [phone_user2],
-        (error, results, fields) => {
-          if (error) {
-            reject(error);
-          } else {
-            resolve(results);
+    let { userCode1, title, description, topic: topicCode, phone_user2, topicDescription } = req.body;
+    
+      // Find the userCode2 based on the provided phone number
+      const results = await new Promise((resolve, reject) => {
+        db.query(
+          "SELECT userCode FROM user WHERE phone = ?",
+          [phone_user2],
+          (error, results, fields) => {
+            if (error) {
+              reject(error);
+            } else {
+              resolve(results);
+            }
           }
-        }
-      );
-    });
+        );
+      });
 
     if (results.length === 0) {
       res.status(404).json({
@@ -33,6 +33,7 @@ router.post("/addNegotiation", async (req, res) => {
 
     const userCode2 = results[0].userCode;
 
+ 
     // Find a suitable mediator based on expertise and ongoing negotiations
     const mediatorQuery = `
     SELECT user.userCode, 
@@ -59,28 +60,26 @@ router.post("/addNegotiation", async (req, res) => {
       );
     });
 
+    let mediatorCode
+
     if (mediatorResults.length === 0) {
-      res.status(404).json({
-        error: "No suitable mediator found for the topic",
-        topicCode: topicCode,
-      });
-      return;
+      mediatorCode = null
+    } else {
+      mediatorCode = mediatorResults[0].userCode;
     }
-
-    const mediatorCode = mediatorResults[0].userCode;
-
+    
     // Get the current timestamp in MySQL datetime format ('YYYY-MM-DD HH:MM:SS')
     const formattedStartTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     // Insert the negotiation record
     await new Promise((resolve, reject) => {
       const insertQuery = `
-        INSERT INTO negotiation (userCode1, userCode2, mediatorCode, topicCode, title, description, startTime)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO negotiation (userCode1, userCode2, mediatorCode, topicCode, title, description, startTime, topicDescription)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
       `;
       db.query(
         insertQuery,
-        [userCode1, userCode2, mediatorCode, topicCode, title, description, formattedStartTime],
+        [userCode1, userCode2, mediatorCode, topicCode, title, description, formattedStartTime, topicDescription],
         (error, result) => {
           if (error) {
             reject(error);
@@ -231,49 +230,48 @@ router.post("/continueNegotiations", (req, res) => {
   const { userCode, userType } = req.body;
 
   if (userType === 'negotiator') {
-    db.query(
-      `
-      SELECT n.negoid, n.title, n.description, n.startTime, n.endTime,
-      CONCAT(u1.firstName, ' ', u1.lastName) AS user1_name, u1.userCode AS userCode1,
-      CONCAT(u2.firstName, ' ', u2.lastName) AS user2_name, u2.userCode AS userCode2,
-      CONCAT(m.firstName, ' ', m.lastName) AS mediator_name, m.userCode AS mediatorCode
-      FROM negotiation AS n
-      LEFT JOIN user AS u1 ON n.userCode1 = u1.userCode
-      LEFT JOIN user AS u2 ON n.userCode2 = u2.userCode
-      LEFT JOIN user AS m ON n.mediatorCode = m.userCode
-      WHERE endTime IS NULL AND userCode1=? OR endTime IS NULL AND userCode2=?
-      ORDER BY n.startTime;
-    `,
-      [userCode, userCode],
-      function (error, result) {
-        if (error) console.log(`error.message:`, error.message)
-        res.send(result);
-      }
-    );
+      db.query(
+          `
+          SELECT n.negoid, n.title, n.description, n.startTime, n.endTime,
+          CONCAT(u1.firstName, ' ', u1.lastName) AS user1_name, u1.userCode AS userCode1,
+          CONCAT(u2.firstName, ' ', u2.lastName) AS user2_name, u2.userCode AS userCode2,
+          CONCAT(m.firstName, ' ', m.lastName) AS mediator_name, m.userCode AS mediatorCode
+          FROM negotiation AS n
+          LEFT JOIN user AS u1 ON n.userCode1 = u1.userCode
+          LEFT JOIN user AS u2 ON n.userCode2 = u2.userCode
+          LEFT JOIN user AS m ON n.mediatorCode = m.userCode
+          WHERE endTime IS NULL AND (userCode1=? OR userCode2=?) AND n.mediatorCode IS NOT NULL
+          ORDER BY n.startTime;
+          `,
+          [userCode, userCode],
+          function (error, result) {
+              if (error) console.log(`error.message:`, error.message)
+              res.send(result);
+          }
+      );
   } else {
-    db.query(
-      `
-      SELECT n.negoid, n.title, n.description, n.startTime, n.endTime,
-      CONCAT(u1.firstName, ' ', u1.lastName) AS user1_name, u1.userCode AS userCode1,
-      CONCAT(u2.firstName, ' ', u2.lastName) AS user2_name, u2.userCode AS userCode2,
-      CONCAT(m.firstName, ' ', m.lastName) AS mediator_name, m.userCode AS mediatorCode
-      FROM negotiation AS n
-      LEFT JOIN user AS u1 ON n.userCode1 = u1.userCode
-      LEFT JOIN user AS u2 ON n.userCode2 = u2.userCode
-      LEFT JOIN user AS m ON n.mediatorCode = m.userCode
-      WHERE n.endTime IS NULL AND n.mediatorCode = ?
-      ORDER BY n.startTime;
-    `,
-      [userCode],
-      function (error, result) {
-        if (error) console.log(`error.message:`, error.message)
-        res.send(result);
-      }
-    );
-
+      db.query(
+          `
+          SELECT n.negoid, n.title, n.description, n.startTime, n.endTime,
+          CONCAT(u1.firstName, ' ', u1.lastName) AS user1_name, u1.userCode AS userCode1,
+          CONCAT(u2.firstName, ' ', u2.lastName) AS user2_name, u2.userCode AS userCode2,
+          CONCAT(m.firstName, ' ', m.lastName) AS mediator_name, m.userCode AS mediatorCode
+          FROM negotiation AS n
+          LEFT JOIN user AS u1 ON n.userCode1 = u1.userCode
+          LEFT JOIN user AS u2 ON n.userCode2 = u2.userCode
+          LEFT JOIN user AS m ON n.mediatorCode = m.userCode
+          WHERE n.endTime IS NULL AND n.mediatorCode = ? AND n.mediatorCode IS NOT NULL
+          ORDER BY n.startTime;
+          `,
+          [userCode],
+          function (error, result) {
+              if (error) console.log(`error.message:`, error.message)
+              res.send(result);
+          }
+      );
   }
-
 });
+
 
 router.get("/query7", (req, res) => {
   db.query(

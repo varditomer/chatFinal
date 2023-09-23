@@ -14,7 +14,10 @@ function addNegotiation() {
     title: document.getElementById("title").value,
     description: document.getElementById("description").value,
     topic: document.getElementById("topic").value,
+    topicDescription: (document.getElementById("topic").value === '-1') ? document.getElementById("otherTopic").value : null,
   };
+
+  console.log(`newNegotiationData:`, newNegotiationData)
 
   // Create a new POST request using the fetch API
   fetch(yourUrl, {
@@ -49,6 +52,19 @@ function populateTopics(topics) {
     option.textContent = topic.name.replace(" Law", ""); // Remove ' Law' from the name
     topicSelect.appendChild(option);
   });
+
+  // adding 'other' option
+  const line = document.createElement("option");
+  line.disabled = true;
+  line.textContent = '──────────';
+  topicSelect.appendChild(line);
+
+  // adding 'other' option
+  const option = document.createElement("option");
+  option.value = -1;
+  option.textContent = 'Other';
+  option.style = "color: #78acfe; font-weight: 600"
+  topicSelect.appendChild(option);
 }
 
 // Fetch negotiation topics and populate the select dropdown
@@ -69,6 +85,14 @@ fetch(topicsUrl, {
     console.error("Fetch error:", error);
   });
 
+// Function to handle topic change
+function handleTopicChange() {
+  const topicSelect = document.getElementById("topic");
+  const otherTopicDiv = document.getElementById("otherTopicDiv");
+  otherTopicDiv.hidden = (topicSelect.value !== "-1");
+}
+
 // Expose the functions to the global scope
 window.goToHomePage = userService.goToHomePage;
 window.addNegotiation = addNegotiation;
+window.handleTopicChange = handleTopicChange;

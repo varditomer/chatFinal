@@ -76,12 +76,12 @@ INSERT INTO `user` (`userCode`, `firstName`, `lastName`, `email`, `username`, `p
 (4, 'Anet', 'Shuminov', 'ashum@technion.ac.il', 'anets', '0523457779', 'University', 'mediator', 'as', 'Expert in labor and employment law', 3, 1),
 (5, 'Shir', 'Asa', 'shas@technion.ac.il', 'ashir', '0557835692', 'University', 'mediator', 'asd', 'Ten years experience in marriage mediation', 2, 0),
 
-(7, 'Mediator', 'One', 'mediator1@example.com', 'mediator1', '0542223333', 'Law School', 'mediator', 'mediator1pass', 'Experienced in civil disputes, including criminal law cases.', 1, 1),
-(8, 'Mediator', 'Two', 'mediator2@example.com', 'mediator2', '0544445555', 'Law School', 'mediator', 'mediator2pass', 'Specialized in property disputes, particularly real estate law.', 6, 1),
-(9, 'Mediator', 'Three', 'mediator3@example.com', 'mediator3', '0546667777', 'Law School', 'mediator', 'mediator3pass', 'Skilled in commercial disputes and corporate law matters.', 3, 1),
-(10, 'Mediator', 'Four', 'mediator4@example.com', 'mediator4', '0547778888', 'Law School', 'mediator', 'mediator4pass', 'Expert in labor disputes, including employment law cases.', 3, 1),
-(11, 'Mediator', 'Five', 'mediator5@example.com', 'mediator5', '0548889999', 'Law School', 'mediator', 'mediator5pass', 'Experienced in contract disputes and intellectual property law.', 4, 1),
-(12, 'Mediator', 'Six', 'mediator6@example.com', 'mediator6', '0549990000', 'Law School', 'mediator', 'mediator6pass', 'Skilled in environmental disputes, including immigration law cases.', 5, 1),
+(7, 'Emily', 'Johnson', 'jemily@chatfinal.com', 'jemily', '0542223333', 'Law School', 'mediator', 'mediator1pass', 'Experienced in civil disputes, including criminal law cases.', 1, 1),
+(8, 'Michael', 'Taylor', 'tmichael@chatfinal.com', 'tmichael', '0544445555', 'Law School', 'mediator', 'mediator2pass', 'Specialized in property disputes, particularly real estate law.', 6, 1),
+(9, 'Sophia', 'Martin', 'msophia@chatfinal.com', 'msophia', '0546667777', 'Law School', 'mediator', 'mediator3pass', 'Skilled in commercial disputes and corporate law matters.', 3, 1),
+(10, 'Brandon', 'Lee', 'lbrandon@chatfinal.com', 'lbrandon', '0547778888', 'Law School', 'mediator', 'mediator4pass', 'Expert in labor disputes, including employment law cases.', 3, 1),
+(11, 'Olivia', 'Smith', 'solivia@chatfinal.com', 'solivia', '0548889999', 'Law School', 'mediator', 'mediator5pass', 'Experienced in contract disputes and intellectual property law.', 4, 1),
+(12, 'Daniel', 'Davis', 'ddaniel@chatfinal.com', 'ddaniel', '0549990000', 'Law School', 'mediator', 'mediator6pass', 'Skilled in environmental disputes, including immigration law cases.', 5, 1),
 
 (13, 'David', 'Choen', 'da@gmail.com', 'davisa', '0542683896', NULL, 'negotiator', 'da1', NULL, NULL, 0),
 (14, 'Anton', 'Rubinsky', 'shirasa92@gmail.com', 'Ruba', '0543968575', NULL, 'negotiator', 'daf', NULL, NULL, 0),
@@ -94,8 +94,9 @@ CREATE TABLE `negotiation` (
   `negoid` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `userCode1` int(11) NOT NULL,
   `userCode2` int(11) NOT NULL,
-  `mediatorCode` int(11) NOT NULL,
+  `mediatorCode` int(11) DEFAULT NULL,
   `topicCode` int(11) NOT NULL,
+  `topicDescription` text DEFAULT NULL,
   `title` text NOT NULL,
   `startTime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `endTime` timestamp NULL DEFAULT NULL,
@@ -110,13 +111,13 @@ CREATE TABLE `negotiation` (
 
 
 INSERT INTO `negotiation` ( `userCode1`, `userCode2`, `mediatorCode`, `topicCode`, `title`, `startTime`, `endTime`, `description`, `summary`) VALUES
-(17, 14, 7, 1, 'Stolen-money', '2023-05-13 16:17:40', '2023-05-13 16:17:40', 'Anton works as a gardener for Nir and Nir suspects he stole from him', NULL),
+(17, 14, 7, 1, 'Stolen money', '2023-05-13 16:17:40', '2023-05-13 16:17:40', 'Anton works as a gardener for Nir and Nir suspects he stole from him', NULL),
 (14, 15, 2, 2, 'Divorce', '2023-05-13 18:17:25', '2023-05-13 17:57:45', 'Coral and Anton have been married for 5 years and want to divorce', 'bidaokl'),
-(15, 13, 5, 2, 'Brothers-conflict', '2023-05-13 07:34:57', NULL, 'Coral and David want to resolve dispute over inheritance', NULL),
-(16, 17, 3, 5, 'Friends-conflict', '2023-05-13 07:36:17', '2023-04-19 08:21:11', 'Nir and Sapir want to go immigrate together but Sapir wants to fly to Greece while Nir wants to fly to USA', NULL),
-(17, 13, 4, 3, 'Money-loan', '2023-05-12 18:58:01', NULL, 'David has borrowed money from Nir to his new business and cannot return the full amount on time', NULL),
-(17, 16, 5, 2, 'High-school-fight', '2023-05-11 21:31:04', NULL, 'David and Sapir are best friends who fall in love with the same girl', NULL),
-(2, 10, 4, 3, 'Work-conflict', '2023-05-12 18:22:57', NULL, 'Coral and David work together and during the job David does not do his part', NULL);
+(15, 13, 5, 2, 'Brothers conflict', '2023-05-13 07:34:57', NULL, 'Coral and David want to resolve dispute over inheritance', NULL),
+(16, 17, 3, 5, 'Friends conflict', '2023-05-13 07:36:17', '2023-04-19 08:21:11', 'Nir and Sapir want to go immigrate together but Sapir wants to fly to Greece while Nir wants to fly to USA', NULL),
+(17, 13, 4, 3, 'Money loan', '2023-05-12 18:58:01', NULL, 'David has borrowed money from Nir to his new business and cannot return the full amount on time', NULL),
+(17, 16, 5, 2, 'High school fight', '2023-05-11 21:31:04', NULL, 'David and Sapir are best friends who fall in love with the same girl', NULL),
+(2, 10, 4, 3, 'Work conflict', '2023-05-12 18:22:57', NULL, 'Coral and David work together and during the job David does not do his part', NULL);
 
 CREATE TABLE `message` (
   `messageCode` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
