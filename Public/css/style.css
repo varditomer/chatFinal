@@ -6,6 +6,7 @@
 @import './pages/join-page.css';
 @import './pages/contact-us.css';
 @import './pages/write-insight.css';
+@import './pages/insight.css';
 
 :root {
   --dark-color-a: #241387;

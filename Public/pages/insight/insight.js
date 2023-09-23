@@ -8,11 +8,11 @@ fetch(yourUrl)
   .then((res) => {
     var strHtml = "";
     strHtml += /*html*/ `
-            <table id="data" border="6" style="margin-left:auto; font-size:10px; margin-right:auto;">
-              <tr>
-                <th>Mediator</th>
-                <th>Title</th>
-                <th>Insight</th>
+            <table id="data">
+              <tr class="row header">
+                <th class="cell">Mediator</th>
+                <th class="cell">Title</th>
+                <th class="cell">Insight</th>
               </tr>
               `;
 
@@ -20,31 +20,19 @@ fetch(yourUrl)
     myarray.forEach((obj) => {
       let { username, title, content } = obj;
       strHtml += /*html*/ `
-            <tr>
-              <td>${username} </td>           
-              <td>${title}</td>
-              <td>${content}</td>
+            <tr class="row">
+              <td class="cell" >${username} </td>           
+              <td class="cell">${title}</td>
+              <td class="cell">${content}</td>
             </tr>
             `;
     });
     strHtml += /*html*/ `
-            <CENTER><button onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>        
+            <button onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>        
                 `;
     document.getElementById("data1").innerHTML = strHtml;
   });
 
-function approvenMed(name) {
-  const yourUrl = "/api/approvenMed";
-  const object = {
-    username: name,
-  };
-  console.log(object.username);
-
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", yourUrl, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify(object));
-}
 
 function exportTableToExcel(tableID, filename = "") {
   var downloadLink;
@@ -76,6 +64,6 @@ function exportTableToExcel(tableID, filename = "") {
     downloadLink.click();
   }
 }
-//link help me: https://www.codexworld.com/export-html-table-data-to-excel-using-javascript/
 
 window.goToHomePage = userService.goToHomePage
+window.exportTableToExcel = exportTableToExcel
