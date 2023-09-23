@@ -133,7 +133,7 @@ router.get("/viewNegotiations/:username", (req, res) => {
   );
 });
 
-router.get("/query8/:username", (req, res) => {
+router.get("/negotiationSummary/:username", (req, res) => {
   const { username } = req.params;
   console.log(`username:`, username)
   db.query(

@@ -37,9 +37,6 @@
 
     background: var(--dark-color-a);
 }
-.row.header .cell {
-    display: block;
-}
 
 @media screen and (max-width: 580px) {
     .row.header .cell {
@@ -66,7 +63,7 @@
 
 
 .cell {
-    /* display: flex; */
+    display: flex;
     width: 100%;
     padding: 6px 4px;
 }

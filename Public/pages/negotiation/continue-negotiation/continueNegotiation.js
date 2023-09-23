@@ -36,19 +36,19 @@ fetch(yourUrl, {
         </h5>
 
         <div class="row header">
-          <div key={title} class="cell">
+          <div class="cell">
               ${titles[0]}
           </div>
-          <div key={title} class="cell">
+          <div class="cell">
               ${titles[1]}
           </div>
-          <div key={title} class="cell">
+          <div class="cell">
               ${titles[2]}
           </div>
-          <div key={title} class="cell">
+          <div class="cell">
               ${titles[3]}
           </div>
-          <div key={title} class="cell">
+          <div class="cell">
               ${titles[4]}
           </div>
         </div>
