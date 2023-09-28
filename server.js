@@ -55,6 +55,7 @@ const emailRouter = require("./api/email");
 const mediatorRouter = require("./api/mediator");
 const expertiseRouter = require("./api/expertise");
 const insightRouter = require("./api/insight");
+const adminRouter = require("./api/admin");
 
 // Use the imported API routers for specific routes
 app.use("/api/auth", authRouter);
@@ -64,6 +65,7 @@ app.use("/api/email", emailRouter);
 app.use("/api/mediator", mediatorRouter);
 app.use("/api/expertise", expertiseRouter);
 app.use("/api/insight", insightRouter);
+app.use("/api/admin", adminRouter);
 
 // Define a chat bot name
 const botName = "Nego Bot";

@@ -4,9 +4,12 @@ const db = require("../services/db.service");
 
 router.get("/query1", (req, res) => {
   db.query(
-    `SELECT firstName,lastName,username, userType, phone ,education,proffesionalExperience FROM user WHERE userType!=? AND userCode!=? ORDER BY 4,2`,
-    ["manager", 100],
+    `SELECT firstName, lastName, email, username, phone,userType
+    FROM user
+    `,
+    ["manager", 1],
     function (error, result) {
+      console.log(result);
       res.send(result);
     }
   );

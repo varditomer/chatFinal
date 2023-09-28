@@ -53,7 +53,7 @@ fetch(yourUrl)
    <div style="color:black" class="cell capitalize" data-title=${titles[4]}>
      ${professionalExperience}  
    </div>
-   <div style="color:black"  class="cell">
+   <div style="color:black;justify-content:center;"  class="cell">
      <button type="submit" class="btn" style="color:white;height:40px" onclick="approveMediator('${mediator.username}');">Approve</button>
    </div>
 </div>
@@ -61,8 +61,6 @@ fetch(yourUrl)
 
 `;
     });
-
-    //console.log(strHtml);
     document.getElementById("data").innerHTML = strHtml;
   });
 
