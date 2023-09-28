@@ -1,6 +1,7 @@
 import { userService } from "../../../services/user.service.js";
 
 const yourUrl = "/api/admin/query1";
+console.log(window.location.href);
 
 fetch(yourUrl)
   .then((res) => res.json())
@@ -10,6 +11,7 @@ fetch(yourUrl)
     strHtml += /*html*/ `
             <table id="data" border="2" style="margin-left:auto; width:100%; border-collapse:collapse;border:2px solid black; margin-top:20px; font-size:20px; margin-right:auto;">
             <tr class="row header">
+              <th class="cell">#</th>
               <th class="cell">First Name</th>
                <th class="cell">Last Name</th>
                <th class="cell">Username</th>
@@ -18,7 +20,7 @@ fetch(yourUrl)
             </tr>
               `;
 
-    res.forEach((obj) => {
+    res.forEach((obj,idx) => {
       let {
         firstName,
         lastName,
@@ -28,6 +30,7 @@ fetch(yourUrl)
       } = obj;
       strHtml += /*html*/ `
             <tr class="row">
+              <td class="cell">${idx+1}</td>           
               <td class="cell">${firstName} </td>           
               <td class="cell">${lastName}</td>
               <td class="cell">${username}</td>
