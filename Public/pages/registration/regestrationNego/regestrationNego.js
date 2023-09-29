@@ -3,7 +3,7 @@ async function validateForm() {
   const firstNameInput = document.getElementById("firstname");
   const lastNameInput = document.getElementById("lastname");
   const emailInput = document.getElementById("email");
-  const phoneInput = document.getElementById("Phone");
+  const phoneInput = document.getElementById("phone");
   const usernameInput = document.getElementById("username");
   const passwordInput = document.getElementById("password");
   const isTermsApproved = document.getElementById("termsPrivacy").checked;
@@ -75,7 +75,6 @@ async function validateForm() {
 
   // Validating email & username isn't already in use
   const isEmailOrUsernameExist = await _isEmailOrUsernameExist(emailInput.value, usernameInput.value)
-  console.log(`isEmailOrUsernameExist:`, isEmailOrUsernameExist)
   if (!isEmailOrUsernameExist.valid) {
     if (isEmailOrUsernameExist.type === 'email') document.getElementById("error-email").textContent = "Email already in use";
     else document.getElementById("error-username").textContent = "Username already in use";
@@ -130,7 +129,7 @@ async function submit() {
       lastName: document.getElementById("lastname").value,
       email: document.getElementById("email").value,
       username: document.getElementById("username").value,
-      phone: document.getElementById("Phone").value,
+      phone: document.getElementById("phone").value,
       userType: "negotiator",
       password: document.getElementById("password").value,
     };

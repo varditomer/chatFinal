@@ -4,10 +4,10 @@ async function validateForm() {
   const firstNameInput = document.getElementById("firstname");
   const lastNameInput = document.getElementById("lastname");
   const emailInput = document.getElementById("email");
-  const phoneInput = document.getElementById("Phone");
+  const phoneInput = document.getElementById("phone");
   const usernameInput = document.getElementById("username");
   const passwordInput = document.getElementById("password");
-  const experienceInput = document.getElementById("ProfessionalDescription");
+  const experienceInput = document.getElementById("professionalDescription");
   const isTermsApproved = document.getElementById("termsPrivacy").checked;
 
   // Reset error messages
@@ -131,11 +131,11 @@ async function submit() {
       lastName: document.getElementById("lastname").value,
       email: document.getElementById("email").value,
       username: document.getElementById("username").value,
-      phone: document.getElementById("Phone").value,
+      phone: document.getElementById("phone").value,
       education: document.getElementById("education").value,
       userType: "mediator",
       password: document.getElementById("password").value,
-      professionalExperience: document.getElementById("ProfessionalDescription").value,
+      professionalExperience: document.getElementById("professionalDescription").value,
       expertiseCode: document.getElementById("expertise").value
     };
     console.log(`userCredentials:`, userDetails);
