@@ -6,32 +6,44 @@ var nodemailer = require("nodemailer");
 
 router.post("/addNegotiation", async (req, res) => {
   try {
-    let { userCode1, title, description, topic: topicCode, phone_user2, topicDescription } = req.body;
-    
-      // Find the userCode2 based on the provided phone number
-      const results = await new Promise((resolve, reject) => {
-        db.query(
-          "SELECT userCode FROM user WHERE phone = ?",
-          [phone_user2],
-          (error, results, fields) => {
-            if (error) {
-              reject(error);
-            } else {
-              resolve(results);
-            }
+    let { userCode1, title, description, topic: topicCode, identifier_user2, topicDescription } = req.body;
+
+    const queryStr = `
+      SELECT userCode, userType FROM user
+      WHERE phone = ? OR username = ? 
+    `;
+
+    const results = await new Promise((resolve, reject) => {
+      db.query(
+        queryStr,
+        [identifier_user2, identifier_user2],
+        (error, results, fields) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(results);
           }
-        );
-      });
+        }
+      );
+    });
 
     if (results.length === 0) {
       res.status(404).json({
-        error: "Phone num. isn't exist",
-        phoneNumber: phone_user2,
+        error: "User not found",
+        identifier: identifier_user2,
       });
       return;
     }
 
-    const userCode2 = results[0].userCode;
+    const { userCode: userCode2, userType } = results[0];
+
+    if (userType !== 'negotiator') {
+      res.status(400).json({
+        error: "The user is not a negotiator",
+        identifier: identifier_user2,
+      });
+      return;
+    }
 
  
     // Find a suitable mediator based on expertise and ongoing negotiations

@@ -6,18 +6,17 @@ const loggedInUser = userService.getLoggedInUser();
 // Function to add a new negotiation
 function addNegotiation() {
   const yourUrl = "/api/negotiation/addNegotiation";
+  const identifier_user2 = document.getElementById("partner").value;
 
   // Create the new negotiation data
   const newNegotiationData = {
     userCode1: loggedInUser.userCode,
-    phone_user2: document.getElementById("phone").value,
+    identifier_user2,
     title: document.getElementById("title").value,
     description: document.getElementById("description").value,
     topic: document.getElementById("topic").value,
     topicDescription: (document.getElementById("topic").value === '-1') ? document.getElementById("otherTopic").value : null,
   };
-
-  console.log(`newNegotiationData:`, newNegotiationData)
 
   // Create a new POST request using the fetch API
   fetch(yourUrl, {
@@ -27,19 +26,18 @@ function addNegotiation() {
     },
     body: JSON.stringify(newNegotiationData),
   })
-    .then(res => res.json())
-    .then(res => {
-      if (res.error) {
-        alert(`${phone} isn't exist`);
-      } else {
-        // Message when the request is successfully sent
-        alert("Request sent successfully");
-        window.location.href = "/pages/home/negotiator/negotiator-page.html";
-      }
-    })
-    .catch(error => {
-      console.error("Fetch error:", error);
-    });
+  .then(res => res.json())
+  .then(res => {
+    if (res.error) {
+      alert(res.error);
+    } else {
+      alert("Request sent successfully");
+      window.location.href = "/pages/home/negotiator/negotiator-page.html";
+    }
+  })
+  .catch(error => {
+    console.error("Fetch error:", error);
+  });
 }
 
 // Function to populate the topics select dropdown
