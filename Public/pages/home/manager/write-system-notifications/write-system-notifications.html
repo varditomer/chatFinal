@@ -13,55 +13,26 @@
   <title>writeSystemNotifications</title>
 </head>
 
-<style>
-  /* When it is unvisited link */
-  a:link {
-    color: rgb(0, 0, 0);
-  }
-
-  /* When it is visited link */
-  a:visited {
-    color: rgb(0, 0, 0);
-  }
-
-  /* When you mouse over link */
-  a:hover {
-    color: red;
-  }
-
-  /* When it is selected link */
-  a:active {
-    color: blue;
-  }
-</style>
-
 <body>
   <header class="join-header">
     <h1>Write Notifications </h1>
   </header>
   <div class="join-container">
 
-    <center>
-      <h1 id="data" style="background-color: rgb(255, 255, 255);">
-    </center>
-
     <main class="join-main">
       <div class="form-control">
-        <li>
-          <div class="input-box padding_hf">
-            <input placeholder="Enter username..." type="text" class="input-text required-entry " title="username"
-              id="username" name="options[2]" value="">
+        <div class="input-box padding_hf">
+          <input placeholder="Enter username..." type="text" class="input-text required-entry " title="username"
+            id="username" name="options[2]" value="">
+        </div>
+        <div class="input-box padding_hf">
+          <textarea placeholder="Write notification..." style=color:black rows="8" cols="57" class="join-container"
+            title="notification" id="notification" name=notification></textarea>
+          <div class="buttons-set padding_hf"> <br><br>
+            <input type="hidden" name="form_id" id="form_id" value="1">
+            <button type="submit" onclick="sendNotification()" class="btn">send</button>
           </div>
-        </li>
-        <li>
-          <div class="input-box padding_hf">
-            <textarea placeholder="Write notification..." style=color:black rows="8" cols="57" class="join-container"
-              title="notification" id="notification" name=notification></textarea>
-            <div class="buttons-set padding_hf"> <br><br>
-              <input type="hidden" name="form_id" id="form_id" value="1">
-              <button type="submit" onclick="sendNotification()" class="btn">send</button>
-            </div>
-          </div>
+        </div>
     </main>
   </div>
 

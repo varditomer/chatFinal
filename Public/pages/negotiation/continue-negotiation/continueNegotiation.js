@@ -22,9 +22,8 @@ fetch(yourUrl, {
       strHtml += `
       <h5 style="display: flex; gap: 10px; align-items: center; font-size: 28px; justify-content: center;">
       <i class="fas fa-gavel" style="color: red; text-decoration: line-through; text-decoration-color: black;"></i>
-        You have no new open negotiations
+        You have no open negotiations
       </h5>
- 
       `
       ;
     }
