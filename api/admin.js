@@ -4,7 +4,7 @@ const db = require("../services/db.service");
 
 router.get("/getUsers", (req, res) => {
   db.query(
-    `SELECT firstName, lastName, username, userType 
+    `SELECT firstName, lastName, userCode, userType 
      FROM user 
      WHERE userType IN ('mediator', 'negotiator')
      ORDER BY FIELD(userType, 'mediator', 'negotiator'), lastName ASC`,

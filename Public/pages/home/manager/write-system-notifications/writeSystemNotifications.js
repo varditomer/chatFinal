@@ -28,7 +28,7 @@ fetch('/api/admin/getUsers')
         }
         
         const option = document.createElement('option');
-        option.value = user.username;
+        option.value = user.userCode;
         option.textContent = `${user.firstName} ${user.lastName}`;
         usernameSelect.appendChild(option);
         
@@ -42,40 +42,33 @@ fetch('/api/admin/getUsers')
 
 
 function sendNotification() {
-  const yourUrl = "/api/notification/sendNotification";
-  const notificationDetails = {
-      username: document.getElementById("username").value,
-      notification: document.getElementById("notification").value,
-  };
-
-  console.log(`notificationDetails:`, notificationDetails)
-
-
-  fetch(yourUrl, {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify(notificationDetails),
-  })
-  .then(response => {
-      if (response.ok) {
-          return response.json();
-      } else {
-          throw new Error("Failed to send notification");
-      }
-  })
-  .then(data => {
-      console.log(data);
-      alert("Your notification has been sent");
-      window.location.href = "../manager-page.html";
-  })
-  .catch(error => {
-      console.error(error);
-      alert("An error occurred while sending the notification");
-  });
+        const yourUrl = "/api/notification/sendNotification";
+        const notificationDetails = {
+            userCode: document.getElementById("username").value,  // Updated line
+            notification: document.getElementById("notification").value,
+        };
+      
+        fetch(yourUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(notificationDetails),
+        })
+        .then(response => response.json())  // Updated line
+        .then(data => {
+            console.log(data);
+            alert(data.message);  // Updated line
+            if (data.message === 'Notification sent successfully') {
+              window.location.href = "../manager-page.html";
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert("An error occurred while sending the notification");
+        });
 }
-
+      
 function goToHomePage() {
     const userType = JSON.parse(localStorage.getItem("loggedInUser")).userType;
     if (userType === "mediator") {

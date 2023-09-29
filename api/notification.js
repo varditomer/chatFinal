@@ -5,19 +5,16 @@ var nodemailer = require("nodemailer");
 
 
 router.post("/sendNotification", (req, res) => {
-console.log(`req:`, req.body)
   db.query(
-    `SELECT userCode FROM user WHERE username=?`,
-    [req.body.username],
+    `INSERT INTO notifications (content, UserCode) VALUES (?, ?)`,
+    [req.body.notification, req.body.userCode],  // Updated line
     function (error, result) {
-      console.log(`result:`, result)
-      console.log(`'${req.body.notification}','${result[0].userCode}':`, '${req.body.notification}','${result[0].userCode}')
-      db.query(
-        `INSERT INTO notifications (content, UserCode) VALUES
-    ('${req.body.notification}','${result[0].userCode}')`,
-
-        function (error, result) { }
-      );
+      if (error) {
+        console.error(error);
+        res.status(500).send({ message: 'Failed to send notification' });
+      } else {
+        res.send({ message: 'Notification sent successfully' });
+      }
     }
   );
 });
