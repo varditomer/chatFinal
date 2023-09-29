@@ -36,35 +36,8 @@ router.post("/notification", (req, res) => {
         );
         return;
       }
-      //     const resultEmail =
-      //     result && result[0] && result[0].email ? result[0].email : null;
-      // res.send({ email: resultEmail });
 
       res.send(result[0].email);
-
-      // var transporter = nodemailer.createTransport({
-      //     service: "gmail",
-      //     auth: {
-      //         user: "negoflict255@gmail.com",
-      //         pass: "barkonyo1",
-      //     },
-      // });
-
-      // var mailOptions = {
-      //     from: "negoflict255@gmail.com",
-      //     to: `${JSON.parse(JSON.stringify(result))}`,
-      //     subject: "Reset your password in NegoFlict web",
-      //     text:
-      //         "for reset your password click the next link http://localhost:3000/newpassword.html",
-      // };
-
-      // transporter.sendMail(mailOptions, function (error, info) {
-      //     if (error) {
-      //         console.log(error);
-      //     } else {
-      //         console.log("Email sent: " + info.response);
-      //     }
-      // });
     }
   );
 });

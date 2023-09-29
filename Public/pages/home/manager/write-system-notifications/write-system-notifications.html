@@ -21,9 +21,14 @@
 
     <main class="join-main">
       <div class="form-control">
+        <h5 style="display: flex; gap: 10px; align-items: center; font-size: 20px; justify-content: center; width: 100%; color: black;">
+          <i class="fas fa-bell"></i>
+          Select user and insert text to create notification
+        </h5>
         <div class="input-box padding_hf">
-          <input placeholder="Enter username..." type="text" class="input-text required-entry " title="username"
-            id="username" name="options[2]" value="">
+          <select id="username" name="options[2]" class="input-select required-entry" title="username">
+            <!-- Options will be populated here by JavaScript -->
+          </select>
         </div>
         <div class="input-box padding_hf">
           <textarea placeholder="Write notification..." style=color:black rows="8" cols="57" class="join-container"
