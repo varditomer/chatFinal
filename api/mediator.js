@@ -17,6 +17,26 @@ router.get("/approvedMed", (req, res) => {
   );
 });
 
+router.get("/getMediators", (req, res) => {
+  const isApproved = 1;
+  const type = "mediator";
+  db.query(
+    `SELECT user.*, expertise.name AS expertiseName 
+     FROM user 
+     JOIN expertise ON user.expertiseCode = expertise.expertiseCode
+     WHERE approved=? AND userType=?`,
+    [isApproved, type],
+    function (error, result) {
+      if (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).send('Internal server error');
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 router.get("/getUnapprovedMediators", (req, res) => {
   const isApproved = 0;
   const type = "mediator";

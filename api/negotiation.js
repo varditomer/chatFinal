@@ -284,6 +284,28 @@ router.post("/continueNegotiations", (req, res) => {
   }
 });
 
+router.get("/getUnassignedNegotiations", async (req, res) => {
+  try {
+    const queryStr = `
+      SELECT * FROM negotiation WHERE mediatorCode is null
+    `;
+
+    const results = await new Promise((resolve, reject) => {
+      db.query(queryStr, (error, results, fields) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+    res.json(results);
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
+  }
+});
+
 
 router.get("/query7", (req, res) => {
   db.query(
@@ -296,6 +318,32 @@ router.get("/query7", (req, res) => {
       res.send(result);
     }
   );
+});
+
+router.post('/assignMediator', (req, res) => {
+  console.log(`req.body:`, req.body);
+  const { negotiationID, mediatorUserCode, mediatorExpertiseCode } = req.body;
+
+  if (!negotiationID || !mediatorUserCode || !mediatorExpertiseCode) {
+    res.status(400).send('Bad request: missing required parameters');
+    return;
+  }
+
+  const query = `
+    UPDATE negotiation
+    SET mediatorCode = ?,
+        topicCode = ?
+    WHERE negoid = ?
+  `;
+
+  db.query(query, [mediatorUserCode, mediatorExpertiseCode, negotiationID], function (error, result) {
+    if (error) {
+      console.error('Error updating data:', error);
+      res.status(500).send('Internal server error');
+    } else {
+      res.send({ message: 'Mediator and topic assigned successfully', result });
+    }
+  });
 });
 
 
