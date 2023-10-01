@@ -7,7 +7,7 @@ fetch(yourUrl)
   .then((res) => {
     let strHtml = "";
     strHtml += /*html*/ `
-            <table id="data" border="2" style="margin-left:auto; font-size:15px; margin-right:auto; color:black;overflow:auto">
+           <table id="data" border="2" style="margin-left:auto; font-size:15px; margin-right:auto; color:black;overflow:auto">
             <tr class="row header">
               <th class="cell">#</th>
               <th class="cell">Negotiation ID</th>
@@ -23,12 +23,12 @@ fetch(yourUrl)
       let { negoid, title, description, startTime, endTime } = obj;
       strHtml += /*html*/ `
             <tr class="row">
-              <td class="cell">${i + 1} </td>           
-              <td class="cell">${negoid} </td>           
-              <td class="cell">${title}</td>
-              <td class="cell">${description}</td>
-              <td class="cell">${startTime.substring(0, 10)} ${startTime.substring(11, 16)}</td>
-              <td class="cell">${endTime.substring(0, 10)} ${endTime.substring(11, 16)}</td>
+              <td data-title="#" class="cell">${i + 1} </td>           
+              <td data-title="Negotiation ID" class="cell">${negoid} </td>           
+              <td data-title="Title" class="cell">${title}</td>
+              <td data-title="Description" class="cell">${description}</td>
+              <td data-title="Start Time" class="cell">${startTime.substring(0, 10)} ${startTime.substring(11, 16)}</td>
+              <td data-title="End Time" class="cell">${endTime.substring(0, 10)} ${endTime.substring(11, 16)}</td>
             </tr>
             `;
     });

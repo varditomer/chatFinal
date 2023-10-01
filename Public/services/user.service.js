@@ -65,7 +65,7 @@ function goToHomePage() {
     } else if (userType === "manager") {
         console.log(window.location.href);
         const urlPath = window.location.pathname
-        if (urlPath === "/pages/system-reports/print-users-list/printuserslist.html" || urlPath === "/pages/system-reports/opened-negotiations/openNegotiation.html" || urlPath === "/pages/system-reports/finished-negotiations/finishednegotiation.html"|| urlPath=== "/pages/usernegotiations/usernegotiations.html") {
+        if (urlPath === "/pages/system-reports/print-users-list/printuserslist.html" || urlPath === "/pages/system-reports/opened-negotiations/openNegotiation.html" || urlPath === "/pages/system-reports/finished-negotiations/finishednegotiation.html"|| urlPath=== "/pages/system-reports/user-negotiations/usernegotiations.html") {
             window.location.href = "/pages/system-reports/viewSystemReports.html"
         }
 

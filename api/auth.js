@@ -116,13 +116,13 @@ router.post("/resetpassword", (req, res) => {
       var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "negoflict2555@gmail.com",
-          pass: "nidhbqdpouvypnhn",
+          user: "negoflict0110@gmail.com",
+          pass: "wvihgmntqxwquwko",
         },
       });
 
       var mailOptions = {
-        from: "negoflict2555@gmail.com",
+        from: "negoflict0110@gmail.com",
         to: `${req.body.email}`,
         subject: "Reset your password in NegoFlict web",
         text: `for reset your password click the next link localhost:7005/reset-password, reset-code: ${resetCode}`,
