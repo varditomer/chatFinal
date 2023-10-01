@@ -8,8 +8,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
     integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <script defer src="./usernegotiations.js"></script>
+  <link rel="stylesheet" href="../../../css/style.css" />
   <title>User Negotiations</title>
 </head>
 
@@ -17,15 +16,15 @@
   <header class="join-header">
     <h1>User's negotiations</h1>
   </header>
-  <div class="join-container">
-    <h1 id="data1" style="background-color: rgb(255, 255, 255); color: #000;">
-  </div>
-  <button class="home_btn" onclick="goToHomePage()">
+  <div id="data1" style="padding: 0 20px; display: flex;flex-direction: column;align-items: center;gap: 20px;" class="table-container"></div>
+  <button  class="home_btn" onclick="goToHomePage()">
     <i class="fas fa-hand-point-left"></i>
     <span class="btn-txt">
       Back
     </span>
   </button>
+  <script type="module" src="./usernegotiations.js"></script>
+
 </body>
 
 </html>

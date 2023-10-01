@@ -7,9 +7,19 @@ const yourUrl = "/api/negotiation/negotiationSummary/" + username;
 fetch(yourUrl)
   .then((res) => res.json())
   .then((res) => {
-    console.log(`res:`, res)
-    var strHtml = "";
-    strHtml += /*html*/ `
+    let strHtml = "";
+    const negotiationSummarys = res
+    if (!negotiationSummarys.length) {
+      strHtml += `
+      <h5 style="display: flex; gap: 10px; align-items: center; font-size: 28px; justify-content: center;">
+      <i class="fas fa-gavel" style="color: red; text-decoration: line-through; text-decoration-color: black;"></i>
+        You have no Negotiations Summarys
+      </h5>
+      `
+        ;
+    } else {
+
+      strHtml += /*html*/ `
             <table id="data">
               <tr class="row header">
                 <th class="cell">Title</th>
@@ -19,10 +29,11 @@ fetch(yourUrl)
               </tr>
             `;
 
-    const negotiationsSummary = res;
-    negotiationsSummary.forEach((obj) => {
-      let { title, description, endTime, summary } = obj;
-      strHtml += /*html*/ `
+      const negotiationsSummary = res;
+      negotiationsSummary.forEach((obj) => {
+        let { title, description, endTime, summary } = obj;
+
+        strHtml += /*html*/ `
             <tr class="row">
               <td class="cell">${title} </td>           
               <td class="cell">${description}</td>
@@ -30,18 +41,19 @@ fetch(yourUrl)
               <td class="cell">${summary}</td>
             </tr>
               `;
-    });
-    strHtml += /*html*/ `
+      });
+      strHtml += /*html*/ `
             <CENTER><button onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>        
                 `;
+    }
     document.getElementById("data1").innerHTML = strHtml;
   });
 
 function exportTableToExcel(tableID, filename = "") {
-  var downloadLink;
-  var dataType = "application/vnd.ms-excel";
-  var tableSelect = document.getElementById(tableID);
-  var tableHTML = tableSelect.outerHTML.replace(/ /g, "%20");
+  let downloadLink;
+  let dataType = "application/vnd.ms-excel";
+  let tableSelect = document.getElementById(tableID);
+  let tableHTML = tableSelect.outerHTML.replace(/ /g, "%20");
 
   // Specify file name
   filename = filename ? filename + ".xls" : "excel_data.xls";
@@ -52,7 +64,7 @@ function exportTableToExcel(tableID, filename = "") {
   document.body.appendChild(downloadLink);
 
   if (navigator.msSaveOrOpenBlob) {
-    var blob = new Blob(["\ufeff", tableHTML], {
+    let blob = new Blob(["\ufeff", tableHTML], {
       type: dataType,
     });
     navigator.msSaveOrOpenBlob(blob, filename);

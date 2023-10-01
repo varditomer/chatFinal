@@ -64,7 +64,7 @@ function goToHomePage() {
         window.location.href = "/pages/home/negotiator/negotiator-page.html";
     } else if (userType === "manager") {
         const urlPath = window.location.pathname
-        if (urlPath === "/pages/system-reports/print-users-list/printuserslist.html" || urlPath === "/pages/system-reports/opened-negotiations/openNegotiation.html" || urlPath === "/pages/system-reports/finished-negotiations/finishednegotiation.html"|| urlPath=== "/pages/usernegotiations/usernegotiations.html") {
+        if (urlPath === "/pages/system-reports/print-users-list/printuserslist.html" || urlPath === "/pages/system-reports/opened-negotiations/openNegotiation.html" || urlPath === "/pages/system-reports/finished-negotiations/finishednegotiation.html"|| urlPath=== "/pages/system-reports/user-negotiations/usernegotiations.html") {
             window.location.href = "/pages/system-reports/viewSystemReports.html"
         }
         else window.location.href = "/pages/home/manager/manager-page.html"; // Redirect to manager page
