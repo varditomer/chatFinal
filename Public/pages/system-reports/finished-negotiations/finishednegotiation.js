@@ -1,84 +1,52 @@
-function goToHomePage() {
-  var userType = localStorage.getItem("userType");
-  if (userType === "mediator") {
-    window.location.href = "../mediatorPage/mediatorPage.html";
-  } else if (userType === "negotiator") {
-    window.location.href = "../negotiatorPage/negotiatorPage.html";
-  } else if (userType === "manager") {
-    window.location.href = "../managerPage/managerPage.html";
-  }
-}
+import { userService } from "../../../services/user.service.js";
 
-function goToPage() {
-  window.location.href = "../viewSystemReports/viewSystemReports.html";
-}
-
-const yourUrl = "/api/query5";
+const yourUrl = "/api/admin/query5";
 
 fetch(yourUrl)
   .then((res) => res.json())
   .then((res) => {
-    var strHtml = "";
+    let strHtml = "";
     strHtml += /*html*/ `
-              
-       
-
-            <table id="data" border="6" style="margin-left:auto; font-size:15px; margin-right:auto;">
-            <tr>
-              <th>Negotiation ID</th>
-               <th>Title</th>
-               <th>Description</th>
-               <th>Start time</th>
-               <th>End time</th>
-
-  
+            <table id="data" border="2" style="margin-left:auto; font-size:15px; margin-right:auto; color:black;overflow:auto">
+            <tr class="row header">
+              <th class="cell">#</th>
+              <th class="cell">Negotiation ID</th>
+               <th class="cell">Title</th>
+               <th class="cell">Description</th>
+               <th class="cell">Start time</th>
+               <th class="cell">End time</th>
             </tr>
-              
-           
-      
               `;
 
-    var myarray = res;
+    let myarray = res;
     myarray.forEach((obj, i) => {
       let { negoid, title, description, startTime, endTime } = obj;
       strHtml += /*html*/ `
-            <tr>
-              <td>${negoid} </td>           
-              <td>${title}</td>
-              <td>${description}</td>
-              <td>${startTime}</td>
-              <td>${endTime}</td>
+            <tr class="row">
+              <td class="cell">${i + 1} </td>           
+              <td class="cell">${negoid} </td>           
+              <td class="cell">${title}</td>
+              <td class="cell">${description}</td>
+              <td class="cell">${startTime.substring(0, 10)} ${startTime.substring(11, 16)}</td>
+              <td class="cell">${endTime.substring(0, 10)} ${endTime.substring(11, 16)}</td>
             </tr>
             `;
     });
 
     strHtml += /*html*/ `
-            <center>
-              <button onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>        
-            </center>
+              <button style="width:250px" onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>        
                 `;
 
     document.getElementById("data1").innerHTML = strHtml;
   });
 
-function approvenMed(name) {
-  const yourUrl = "/api/approvenMed";
-  const object = {
-    username: name,
-  };
-  console.log(object.username);
 
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", yourUrl, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.send(JSON.stringify(object));
-}
 
 function exportTableToExcel(tableID, filename = "") {
-  var downloadLink;
-  var dataType = "application/vnd.ms-excel";
-  var tableSelect = document.getElementById(tableID);
-  var tableHTML = tableSelect.outerHTML.replace(/ /g, "%20");
+  let downloadLink;
+  let dataType = "application/vnd.ms-excel";
+  let tableSelect = document.getElementById(tableID);
+  let tableHTML = tableSelect.outerHTML.replace(/ /g, "%20");
 
   // Specify file name
   filename = filename ? filename + ".xls" : "excel_data.xls";
@@ -89,7 +57,7 @@ function exportTableToExcel(tableID, filename = "") {
   document.body.appendChild(downloadLink);
 
   if (navigator.msSaveOrOpenBlob) {
-    var blob = new Blob(["\ufeff", tableHTML], {
+    let blob = new Blob(["\ufeff", tableHTML], {
       type: dataType,
     });
     navigator.msSaveOrOpenBlob(blob, filename);
@@ -104,4 +72,6 @@ function exportTableToExcel(tableID, filename = "") {
     downloadLink.click();
   }
 }
-//link help me: https://www.codexworld.com/export-html-table-data-to-excel-using-javascript/
+
+window.exportTableToExcel = exportTableToExcel
+window.goToHomePage = userService.goToHomePage
