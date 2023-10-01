@@ -64,6 +64,7 @@ CREATE TABLE `user` (
   `professionalExperience` varchar(255) DEFAULT NULL,
   `expertiseCode` int(11) DEFAULT NULL,
   `approved` tinyint(1) NOT NULL DEFAULT 0,
+  `resetPasswordCode` varchar(255) DEFAULT NULL
   FOREIGN KEY (`expertiseCode`) REFERENCES `expertise` (`expertiseCode`)
 );
 

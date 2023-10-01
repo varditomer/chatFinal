@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../services/db.service");
+const utilService = require('../services/utils')
 var nodemailer = require("nodemailer");
 
 
@@ -67,14 +68,14 @@ router.post("/signupMedi", (req, res) => {
     `INSERT INTO user (firstName, lastName, email, username, phone, education, userType, password, professionalExperience, expertiseCode) VALUES
     (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
-      req.body.firstName, 
-      req.body.lastName, 
-      req.body.email, 
-      req.body.username, 
-      req.body.phone, 
-      req.body.education, 
-      req.body.userType, 
-      req.body.password, 
+      req.body.firstName,
+      req.body.lastName,
+      req.body.email,
+      req.body.username,
+      req.body.phone,
+      req.body.education,
+      req.body.userType,
+      req.body.password,
       req.body.professionalExperience,
       +req.body.expertiseCode
     ],
@@ -94,8 +95,7 @@ router.post("/signupMedi", (req, res) => {
 
 router.post("/resetpassword", (req, res) => {
   const email = req.body.email;
-
-  const resetCode = makeCode()
+  const resetCode = utilService.makeCode()
 
   // בדיקה אם האימייל קיים במסד הנתונים
   db.query(
@@ -113,19 +113,46 @@ router.post("/resetpassword", (req, res) => {
           .json({ error: "כתובת האימייל אינה קיימת במערכת" });
       }
 
+      db.query(
+        `
+          UPDATE user 
+          SET resetPasswordCode = ?
+          WHERE email = ?
+        `,
+        [resetCode, email],
+        (error, results) => {
+          if (error) {
+            console.log(error);
+            return res.status(500).json({ error: "update reset password code fail on BE" });
+          }
+
+          if (results.length === 0) {
+            return res
+              .status(404)
+              .json({ error: "כתובת האימייל אינה קיימת במערכת" });
+          }
+        }
+      )
+
       var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "negoflict2555@gmail.com",
-          pass: "nidhbqdpouvypnhn",
+          user: "negoflict0110@gmail.com",
+          pass: "wvih gmnt qxwq uwko",
         },
       });
 
+      const resetPasswordLink = 'http://localhost:7005/new-password'; // Update with the actual reset password link
+
+
       var mailOptions = {
-        from: "negoflict2555@gmail.com",
+        from: "negoflict0110@gmail.com",
         to: `${req.body.email}`,
         subject: "Reset your password in NegoFlict web",
-        text: `for reset your password click the next link localhost:7005/reset-password, reset-code: ${resetCode}`,
+        html: `
+          <p>Your reset password code is: <span style="color: blue; user-select: all; cursor: pointer;">${resetCode}</span></p>
+          <p>Click <a href="${resetPasswordLink}">here</a> to reset your password.</p>
+        `,
       };
 
       transporter.sendMail(mailOptions, function (error, info) {
