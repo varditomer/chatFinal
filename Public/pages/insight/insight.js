@@ -6,7 +6,7 @@ const yourUrl = "/api/insight/getInsights/";
 fetch(yourUrl)
   .then((res) => res.json())
   .then((res) => {
-    var strHtml = "";
+    let strHtml = "";
     strHtml += /*html*/ `
             <table id="data">
               <tr class="row header">
@@ -16,29 +16,29 @@ fetch(yourUrl)
               </tr>
               `;
 
-    var myarray = res;
+    let myarray = res;
     myarray.forEach((obj) => {
       let { username, title, content } = obj;
       strHtml += /*html*/ `
             <tr class="row">
-              <td class="cell" >${username} </td>           
-              <td class="cell">${title}</td>
-              <td class="cell">${content}</td>
+              <td data-title="User Name" class="cell" >${username} </td>           
+              <td data-title="Title" class="cell">${title}</td>
+              <td data-title="Content" class="cell">${content}</td>
             </tr>
             `;
     });
     strHtml += /*html*/ `
-            <button onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>        
+            <button class="btn" onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>        
                 `;
     document.getElementById("data1").innerHTML = strHtml;
   });
 
 
 function exportTableToExcel(tableID, filename = "") {
-  var downloadLink;
-  var dataType = "application/vnd.ms-excel";
-  var tableSelect = document.getElementById(tableID);
-  var tableHTML = tableSelect.outerHTML.replace(/ /g, "%20");
+  let downloadLink;
+  let dataType = "application/vnd.ms-excel";
+  let tableSelect = document.getElementById(tableID);
+  let tableHTML = tableSelect.outerHTML.replace(/ /g, "%20");
 
   // Specify file name
   filename = filename ? filename + ".xls" : "excel_data.xls";
@@ -49,7 +49,7 @@ function exportTableToExcel(tableID, filename = "") {
   document.body.appendChild(downloadLink);
 
   if (navigator.msSaveOrOpenBlob) {
-    var blob = new Blob(["\ufeff", tableHTML], {
+    let blob = new Blob(["\ufeff", tableHTML], {
       type: dataType,
     });
     navigator.msSaveOrOpenBlob(blob, filename);

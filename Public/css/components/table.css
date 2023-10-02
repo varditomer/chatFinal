@@ -43,9 +43,12 @@
         display: none;
     }
     .row.header {
-        display: block;
+        display: none;
         padding: 0;
         height: 6px;
+    }
+
+    .cell{
     }
 }
 
@@ -76,6 +79,7 @@
     .cell {
         padding: 2px 16px;
         display: block;
+        font-size: 16px !important;
     }
 
     .cell:before {
