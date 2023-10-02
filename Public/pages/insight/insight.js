@@ -7,8 +7,18 @@ fetch(yourUrl)
   .then((res) => res.json())
   .then((res) => {
     let strHtml = "";
-    strHtml += /*html*/ `
-            <table id="data">
+    const insights = res
+    if (!insights.length) {
+      strHtml += `
+      <h5 style="display: flex; gap: 10px; align-items: center; font-size: 28px; justify-content: center;">
+      <i class="fas fa-gavel" style="color: red; text-decoration: line-through; text-decoration-color: black;"></i>
+        You have no Negotiations Summaries
+      </h5>
+      `
+        ;
+    } else {
+      strHtml += /*html*/ `
+            <table class="table-container" id="data">
               <tr class="row header">
                 <th class="cell">Mediator</th>
                 <th class="cell">Title</th>
@@ -16,20 +26,21 @@ fetch(yourUrl)
               </tr>
               `;
 
-    let myarray = res;
-    myarray.forEach((obj) => {
-      let { username, title, content } = obj;
-      strHtml += /*html*/ `
+      let myarray = res;
+      myarray.forEach((obj) => {
+        let { username, title, content } = obj;
+        strHtml += /*html*/ `
             <tr class="row">
               <td data-title="User Name" class="cell" >${username} </td>           
               <td data-title="Title" class="cell">${title}</td>
               <td data-title="Content" class="cell">${content}</td>
             </tr>
             `;
-    });
-    strHtml += /*html*/ `
+      });
+      strHtml += /*html*/ `
             <button class="btn" onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>        
                 `;
+    }
     document.getElementById("data1").innerHTML = strHtml;
   });
 
