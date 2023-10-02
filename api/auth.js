@@ -199,7 +199,7 @@ router.post("/checkUserExists", (req, res) => {
           console.log("User already exists");
         } else {
           // If user does not exist, return an empty response
-          res.json({});
+          res.json('');
           console.log("User does not exist");
         }
       }
