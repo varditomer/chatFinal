@@ -13,14 +13,14 @@ fetch(yourUrl)
       strHtml += `
       <h5 style="display: flex; gap: 10px; align-items: center; font-size: 28px; justify-content: center;">
       <i class="fas fa-gavel" style="color: red; text-decoration: line-through; text-decoration-color: black;"></i>
-        You have no Negotiations Summarys
+        You have no Negotiations Summaries
       </h5>
       `
         ;
     } else {
 
       strHtml += /*html*/ `
-            <table id="data">
+            <table class="table-container" id="data">
               <tr class="row header">
                 <th class="cell">Title</th>
                 <th class="cell">Description</th>
@@ -43,7 +43,7 @@ fetch(yourUrl)
               `;
       });
       strHtml += /*html*/ `
-            <CENTER><button onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>        
+            <button class="btn" onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>        
                 `;
     }
     document.getElementById("data1").innerHTML = strHtml;
