@@ -64,7 +64,7 @@ CREATE TABLE `user` (
   `professionalExperience` varchar(255) DEFAULT NULL,
   `expertiseCode` int(11) DEFAULT NULL,
   `approved` tinyint(1) NOT NULL DEFAULT 0,
-  `resetPasswordCode` varchar(255) DEFAULT NULL
+  `resetPasswordCode` varchar(255) DEFAULT NULL,
   FOREIGN KEY (`expertiseCode`) REFERENCES `expertise` (`expertiseCode`)
 );
 
@@ -137,8 +137,7 @@ CREATE TABLE `message` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-INSERT INTO `message` (`messageCode`, `content`, `userCode`, `time`, `negoid`) 
-VALUES
+INSERT INTO `message` (`messageCode`, `content`, `userCode`, `time`, `negoid`) VALUES
 (10, 'Hey nir', 14, '2023-04-15 08:01:59', 1),
 (11, 'Hey Anton', 17, '2023-04-15 08:02:11', 1),
 (12, 'I really want to explain myself because i think there was a big cofusion', 14, '2023-04-17 11:45:01', 1),
@@ -177,8 +176,7 @@ CREATE TABLE `notifications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-INSERT INTO `notifications` (`id`, `UserCode`, `content`, `isSeen`) 
-VALUES
+INSERT INTO `notifications` (`id`, `UserCode`, `content`, `isSeen`) VALUES
 (1, 2, 'Please check your Email', 1),
 (2, 5, 'Dont forget to change your password', 0),
 (3, 17, 'Please answer on our service', 1),
