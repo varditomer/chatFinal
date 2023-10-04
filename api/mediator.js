@@ -42,11 +42,37 @@ router.get("/getUnapprovedMediators", (req, res) => {
   const type = "mediator";
 
   db.query(
-    `SELECT firstName,lastName,username,education,professionalExperience FROM user WHERE approved=? AND userType=?`,
+    `
+    SELECT 
+        user.firstName, 
+        user.lastName, 
+        user.username, 
+        user.education, 
+        user.professionalExperience, 
+        user.expertiseCode, 
+        user.expertiseDescription,
+        CASE 
+            WHEN user.expertiseCode = -1 THEN 'undefined'
+            ELSE expertise.name
+        END as expertiseName
+    FROM 
+        user 
+    LEFT JOIN 
+        expertise 
+    ON 
+        user.expertiseCode = expertise.expertiseCode
+    WHERE 
+        user.approved = ? AND user.userType = ?
+    `,
     [isApproved, type],
     function (error, result) {
-      console.log(JSON.stringify(result));
-      res.send(result);
+      if (error) {
+        console.error(error);
+        res.status(500).send(error);
+      } else {
+        console.log(JSON.stringify(result));
+        res.send(result);
+      }
     }
   );
 });
@@ -71,6 +97,44 @@ router.post("/approveMediator", (req, res) => {
     }
   );
 });
+
+router.post("/assignExpertise", (req, res) => {
+  console.log(`req.body:`, req.body)
+  const { expertiseCode, expertiseName, username } = req.body;
+
+  if (expertiseName) {  // If adding new expertise
+    // Insert new expertise and get its code
+    db.query(
+      `INSERT INTO expertise (name) VALUES (?)`,
+      [expertiseName],
+      function (error, result) {
+        if (error) {
+          console.error('Error inserting new expertise:', error.message);
+          return res.status(500).json({ error: 'Inserting Expertise Failed!' });
+        }
+        assignExpertiseToMediator(username, result.insertId, res);
+      }
+    );
+  } else {  // If assigning existing expertise
+    assignExpertiseToMediator(username, expertiseCode, res);
+  }
+});
+
+function assignExpertiseToMediator(username, expertiseCode, res) {
+  db.query(
+    `UPDATE user SET expertiseCode=? WHERE username=?`,
+    [expertiseCode, username],
+    function (error, result) {
+      if (error) {
+        console.error('Error assigning expertise to mediator:', error.message);
+        return res.status(500).json({ error: 'Assigning Expertise Failed!' });
+      }
+      console.log(`Expertise assigned to mediator: '${username}'`);
+      return res.json({ username, expertiseCode });
+    }
+  );
+}
+
 
 router.post("/assignmedi", (req, res) => {
   db.query(

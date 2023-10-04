@@ -21,13 +21,13 @@
 
         <div class="">
           <label for="firstname">First Name</label>
-          <input type="text" name="firstname" id="firstname" placeholder="Enter your firstname..." required />
+          <input type="text" name="firstname" id="firstname" placeholder="Enter your first name..." required />
           <div id="error-firstname" class="error-message"></div>
         </div>
 
         <div class="">
           <label for="lastname">Last Name</label>
-          <input type="text" name="lastname" id="lastname" placeholder="Enter your lastname..." required />
+          <input type="text" name="lastname" id="lastname" placeholder="Enter your last name..." required />
           <div id="error-lastname" class="error-message"></div>
         </div>
 
@@ -66,15 +66,20 @@
         <div class="">
           <label for="professionalDescription">Professional experience</label>
           <input type="text" placeholder="Describe your professional experience..." name="ProfessionalDescription"
-            id="professionalDescription" required><br>
+            id="professionalDescription" required>
           <div id="error-experience" class="error-message"></div>
         </div>
 
         <div class="">
           <label for="expertise">Select your expertise</label>
-          <select name="expertise" id="expertise" required>
+          <select name="expertise" id="expertise" required onchange="handleTopicChange()">
             <!-- Options will be populated dynamically using JavaScript -->
           </select>
+        </div>
+
+        <div style="width: 100%;" id="otherExpertiseDiv" hidden>
+          <label for="otherExpertise">Expertise Description</label>
+          <input type="text" name="other-expertise" id="otherExpertise" placeholder="Describe the expertise..." />
         </div>
 
         <div style="display: flex; flex-direction: column;">

@@ -3,8 +3,8 @@
 async function validateForm() {
   const firstNameInput = document.getElementById("firstname");
   const lastNameInput = document.getElementById("lastname");
-  const emailInput = document.getElementById("email");
   const phoneInput = document.getElementById("phone");
+  const emailInput = document.getElementById("email");
   const usernameInput = document.getElementById("username");
   const passwordInput = document.getElementById("password");
   const experienceInput = document.getElementById("professionalDescription");
@@ -17,7 +17,7 @@ async function validateForm() {
   });
 
   let isValid = true;
-  
+
   // Validate Terms Approved
   if (!isTermsApproved) {
     document.getElementById("error-terms").textContent =
@@ -129,16 +129,16 @@ async function submit() {
     const userDetails = {
       firstName: document.getElementById("firstname").value,
       lastName: document.getElementById("lastname").value,
+      phone: document.getElementById("phone").value,
       email: document.getElementById("email").value,
       username: document.getElementById("username").value,
-      phone: document.getElementById("phone").value,
+      password: document.getElementById("password").value,
       education: document.getElementById("education").value,
       userType: "mediator",
-      password: document.getElementById("password").value,
       professionalExperience: document.getElementById("professionalDescription").value,
-      expertiseCode: document.getElementById("expertise").value
+      expertiseCode: document.getElementById("expertise").value,
+      expertiseDescription: (document.getElementById("expertise").value === '-1') ? document.getElementById("otherExpertise").value : null,
     };
-    console.log(`userCredentials:`, userDetails);
 
     fetch(yourUrl, {
       method: "POST",
@@ -164,7 +164,6 @@ async function submit() {
 
 // Function to populate the expertise select dropdown
 function populateExpertise(expertise) {
-  console.log(`expertise:`, expertise)
   const expertiseSelect = document.getElementById("expertise");
 
   expertise.forEach(e => {
@@ -173,6 +172,26 @@ function populateExpertise(expertise) {
     option.textContent = e.name;
     expertiseSelect.appendChild(option);
   });
+
+  // adding 'other' option
+  const line = document.createElement("option");
+  line.disabled = true;
+  line.textContent = '──────────';
+  expertiseSelect.appendChild(line);
+
+  // adding 'other' option
+  const option = document.createElement("option");
+  option.value = -1;
+  option.textContent = 'Other';
+  option.style = "color: #78acfe; font-weight: 600"
+  expertiseSelect.appendChild(option);
+}
+
+// Function to handle topic change
+function handleTopicChange() {
+  const expertiseSelect = document.getElementById("expertise");
+  const otherExpertiseDiv = document.getElementById("otherExpertiseDiv");
+  otherExpertiseDiv.hidden = (expertiseSelect.value !== "-1");
 }
 
 // Fetch negotiation expertise and populate the select dropdown

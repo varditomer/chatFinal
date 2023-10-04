@@ -92,8 +92,8 @@ function loadMediators() {
       const select = document.getElementById('mediatorList');
       data.forEach(mediator => {
         const option = document.createElement('option');
-        option.value = mediator.userCode;  // Assuming userCode is the property name from your API response
-        option.textContent = `${mediator.firstName} ${mediator.lastName} (${mediator.expertiseName})`;  // Accessing expertiseName from your API response
+        option.value = mediator.userCode;
+        option.textContent = `${mediator.firstName} ${mediator.lastName} (${mediator.expertiseName})`;
         option.dataset.expertiseCode = mediator.expertiseCode;  // Setting expertise code as a data attribute
         select.appendChild(option);
       });

@@ -11,7 +11,6 @@ router.get("/getExpertise", (req, res) => {
           res.status(500).json({ message: "Error getting expertise" });
         } else {
           const expertise = results;
-          console.log(`expertise:`, expertise)
           res.json(expertise);
         }
       }

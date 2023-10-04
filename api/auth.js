@@ -62,11 +62,13 @@ router.post("/signupNego", (req, res) => {
 
 // Route to handle mediator signup
 router.post("/signupMedi", (req, res) => {
-  console.log(`req.body:`, req.body)
   // Insert the mediator details into the database
+  console.log(`req.body:`, req.body)
+  const bla = req.body.expertiseDescription === '-1' ? null : req.body.expertiseDescription
+  console.log(`bla:`, bla)
   db.query(
-    `INSERT INTO user (firstName, lastName, email, username, phone, education, userType, password, professionalExperience, expertiseCode) VALUES
-    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO user (firstName, lastName, email, username, phone, education, userType, password, professionalExperience, expertiseCode, expertiseDescription) VALUES
+    (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       req.body.firstName,
       req.body.lastName,
@@ -77,7 +79,8 @@ router.post("/signupMedi", (req, res) => {
       req.body.userType,
       req.body.password,
       req.body.professionalExperience,
-      +req.body.expertiseCode
+      req.body.expertiseCode === '-1' ? null : req.body.expertiseCode,
+      req.body.expertiseDescription
     ],
     function (error, results) {
       if (error) {
