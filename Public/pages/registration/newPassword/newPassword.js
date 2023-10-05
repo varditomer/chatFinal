@@ -87,31 +87,35 @@ async function _isEmailOrUsernameExist(emailInput, usernameInput) {
 
 async function newPassword() {
   const isValidForm = await validateForm();
-  if (!isValidForm) return
-  const yourUrl = "/api/resetpass";
-  const object = {
-    //put here relevant
-    username: document.getElementById("username").value,
-    password: document.getElementById("newPassword").value,
-    password: document.getElementById("resetPasswordCode").value,
-  };
+  if (!isValidForm) return;
 
-  console.log(object);
-  
+  const yourUrl = "/api/auth/resetpass";
+  const userNewCredentials = {
+    username: document.getElementById("username").value,
+    newPassword: document.getElementById("newPassword").value,
+    resetCode: document.getElementById("resetCode").value,
+  };
+console.log(`userNewCredentials:`, userNewCredentials)
   try {
     const response = await fetch(yourUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(object)
+      body: JSON.stringify(userNewCredentials)
     });
-    
+
+    const responseData = await response.json();
+
     if (!response.ok) {
-      throw new Error(`Network response was not ok ${response.statusText}`);
+      const errorMessage = responseData.error || `Network response was not ok: ${response.statusText}`;
+      alert(errorMessage);
+      throw new Error(errorMessage);
+    } else {
+      alert('The password has been changed');
+      window.location.href = '/index.html';
     }
-    
-    alert('The password has been changed');
+
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error);
   }

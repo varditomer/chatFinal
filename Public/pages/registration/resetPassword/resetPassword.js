@@ -6,8 +6,6 @@ async function sendEmail() {
         email: document.getElementById("mail").value,
     };
 
-    console.log(object);
-
     try {
         const response = await fetch(yourUrl, {
             method: 'POST',
@@ -19,6 +17,7 @@ async function sendEmail() {
 
         if (response.ok) {
             alert("Check your mail box");
+            window.location.href = '/index.html';
         } else if (response.status === 404) {
             alert("Email address does not exist");
         } else {

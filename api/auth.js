@@ -96,6 +96,7 @@ router.post("/signupMedi", (req, res) => {
   );
 });
 
+// reset password init
 router.post("/resetpassword", (req, res) => {
   const email = req.body.email;
   const resetCode = utilService.makeCode()
@@ -145,7 +146,7 @@ router.post("/resetpassword", (req, res) => {
         },
       });
 
-      const resetPasswordLink = 'http://localhost:7005/new-password'; // Update with the actual reset password link
+      const resetPasswordLink = 'http://localhost:7005/pages/registration/newPassword/new-password.html';
 
 
       var mailOptions = {
@@ -171,14 +172,76 @@ router.post("/resetpassword", (req, res) => {
   );
 });
 
+// executing reset password
 router.post("/resetpass", (req, res) => {
+  const { username, newPassword, resetCode } = req.body;
+
   db.query(
-    `UPDATE user SET password=
-('${req.body.password}') WHERE username=?`,
-    [req.body.username],
-    function (error, result) { }
+    `SELECT resetPasswordCode, email FROM user WHERE username = ?`,
+    [username],
+    function (error, result) {
+      if (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Server error' });
+      }
+
+      if (result.length === 0) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      const dbResetCode = result[0].resetPasswordCode;
+      const email = result[0].email;
+
+      if (dbResetCode !== resetCode) {
+        return res.status(400).json({ error: 'Incorrect reset code' });
+      }
+
+      db.query(
+        `UPDATE user SET password = ? WHERE username = ?`,
+        [newPassword, username],
+        function (error, result) {
+          if (error) {
+            console.error(error);
+            return res.status(500).json({ error: 'Server error' });
+          }
+
+          var transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              user: "negoflict0110@gmail.com",
+              pass: "wvih gmnt qxwq uwko",
+            },
+          });
+
+          const siteURL = 'http://localhost:7005';
+
+          var mailOptions = {
+            from: "negoflict0110@gmail.com",
+            to: email,
+            subject: "Reset password confirmation from NegoFlict",
+            html: `
+              <p>Your password has been reset successfully.</p>
+              <p>Click <a href="${siteURL}">here</a> to login with your new password.</p>
+            `,
+          };
+
+          transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+              console.log(error);
+              // Not sending error to frontend as per your request
+            } else {
+              console.log("Email sent: " + info.response);
+            }
+          });
+
+          res.status(200).json({ message: 'Password updated successfully' });
+        }
+      );
+    }
   );
 });
+
+
 
 
 
