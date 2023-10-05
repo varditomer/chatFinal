@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../services/db.service");
-var nodemailer = require("nodemailer");
+let nodemailer = require("nodemailer");
 
-
+/**
+ * Sends a notification to a specified user and stores it in the database.
+ * Expects request body to contain notification content and user code.
+ */
 router.post("/sendNotification", (req, res) => {
   db.query(
     `INSERT INTO notifications (content, UserCode) VALUES (?, ?)`,
@@ -19,8 +22,10 @@ router.post("/sendNotification", (req, res) => {
   );
 });
 
-
-
+/**
+ * Retrieves the email associated with a specific username.
+ * Expects request body to contain the username.
+ */
 router.post("/notification", (req, res) => {
   db.query(
     `SELECT email FROM user WHERE username=? `,
@@ -39,6 +44,10 @@ router.post("/notification", (req, res) => {
   );
 });
 
+/**
+ * Retrieves unread notifications for a user based on their user code.
+ * Expects user code as a route parameter.
+ */
 router.get("/getNotifications/:userCode", (req, res) => {
   const { userCode } = req.params;
   db.query(
@@ -55,6 +64,10 @@ router.get("/getNotifications/:userCode", (req, res) => {
   );
 });
 
+/**
+ * Marks a notification as seen.
+ * Expects request body to contain the notification ID.
+ */
 router.post("/markNotificationAsSeen", (req, res) => {
   const { notificationId } = req.body
   db.query(
