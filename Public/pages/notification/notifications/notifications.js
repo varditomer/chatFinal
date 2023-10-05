@@ -31,7 +31,7 @@ function read(notificationId) {
 
 
 const user = userService.getLoggedInUser()
-const titles = ['#', 'Notification', '']
+const titles = ['num', 'Notification', '']
 const yourUrl = "/api/notification/getNotifications/" + user.userCode;
 
 fetch(yourUrl)

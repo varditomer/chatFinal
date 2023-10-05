@@ -30,7 +30,12 @@ router.post("/addInsight", (req, res) => {
     VALUES (?, ?, ?)`,
     [username, title, content],
     function (error, result) {
-
+      if (error) {
+        console.log(error);
+        res.status(500).json({ error: "adding insight failed" });
+      } else {
+        res.status(200).json({ message: "insight add successfully" });
+      }
     }
   );
 });

@@ -7,9 +7,9 @@ fetch(yourUrl)
   .then((res) => {
     let strHtml = ""; // Initialize an empty string to store the HTML table structure
     strHtml += /*html*/ `
-      <table id="data" border="2" style="margin-left:auto; font-size:15px; margin-right:auto; color:black; overflow:auto; width:100%">
+      <table id="data" style="margin-left:auto; font-size:15px; margin-right:auto; color:black; overflow:auto; width:100%">
         <tr class="row header">
-          <th class="cell">#</th>
+          <th class="cell">Num</th>
           <th class="cell">User Code</th>
           <th class="cell">First Name</th>
           <th class="cell">Last Name</th>
@@ -23,7 +23,7 @@ fetch(yourUrl)
       let { userCode, firstName, lastName, userType, Num } = obj; // Destructure user object properties
       strHtml += /*html*/ `
         <tr class="row">
-          <td data-title="#" class="cell">${idx + 1}</td>
+          <td data-title="Num" class="cell">${idx + 1}</td>
           <td data-title="User Code" class="cell">${userCode}</td>
           <td data-title="First Name" class="cell">${firstName}</td>
           <td data-title="Last Name" class="cell">${lastName}</td>

@@ -9,9 +9,9 @@ fetch(yourUrl)
     console.log(res); // Log the fetched data to the console for debugging purposes
     let strHtml = ""; // Initialize an empty string to store the HTML table structure
     strHtml += /*html*/ `
-      <table id="data" border="2" style="margin-left:auto; width:100%; border-collapse:collapse;border:2px solid black; margin-top:20px; font-size:20px; margin-right:auto;">
+      <table id="data" style="margin-left:auto; width:100%; margin-top:20px; font-size:20px; margin-right:auto;">
         <tr class="row header">
-          <th class="cell">#</th>
+          <th class="cell">Num</th>
           <th class="cell">First Name</th>
           <th class="cell">Last Name</th>
           <th class="cell">Username</th>
@@ -25,12 +25,12 @@ fetch(yourUrl)
       let { firstName, lastName, username, userType, phone } = obj; // Destructure user object properties
       strHtml += /*html*/ `
         <tr class="row">
-          <td class="cell">${idx + 1}</td>
-          <td class="cell">${firstName}</td>
-          <td class="cell">${lastName}</td>
-          <td class="cell">${username}</td>
-          <td class="cell">${userType}</td>
-          <td class="cell">${phone}</td>
+          <td class="cell" data-title="Num">${idx + 1}</td>
+          <td class="cell" data-title="First Name">${firstName}</td>
+          <td class="cell" data-title="Last Name">${lastName}</td>
+          <td class="cell" data-title="Username">${username}</td>
+          <td class="cell" data-title="User Type">${userType}</td>
+          <td class="cell" data-title="Phone">${phone}</td>
         </tr>
       `; // Add user data to the HTML structure row by row
     });

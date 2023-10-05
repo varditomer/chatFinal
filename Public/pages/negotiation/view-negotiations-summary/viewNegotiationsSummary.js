@@ -35,10 +35,10 @@ fetch(yourUrl)
 
         strHtml += /*html*/ `
             <tr class="row">
-              <td class="cell">${title} </td>           
-              <td class="cell">${description}</td>
-              <td class="cell">${endTime}</td>
-              <td class="cell">${summary}</td>
+              <td class="cell" data-title="Title">${title}</td>           
+              <td class="cell" data-title="Description">${description}</td>
+              <td class="cell" data-title="End time">${endTime.substring(0,10)} ${endTime.substring(11,16)}</td>
+              <td class="cell" data-title="Summary">${summary}</td>
             </tr>
               `;
       });
@@ -54,6 +54,8 @@ function exportTableToExcel(tableID, filename = "") {
   let dataType = "application/vnd.ms-excel";
   let tableSelect = document.getElementById(tableID);
   let tableHTML = tableSelect.outerHTML.replace(/ /g, "%20");
+  console.log(`tableSelect:`, tableSelect)
+  console.log(`tableHTML:`, tableHTML)
 
   // Specify file name
   filename = filename ? filename + ".xls" : "excel_data.xls";

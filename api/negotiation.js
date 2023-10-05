@@ -10,13 +10,13 @@ router.post("/addNegotiation", async (req, res) => {
 
     const queryStr = `
       SELECT userCode, userType FROM user
-      WHERE phone = ? OR username = ? 
+      WHERE (phone = ? OR username = ?) AND userCode <> ?
     `;
 
     const results = await new Promise((resolve, reject) => {
       db.query(
         queryStr,
-        [identifier_user2, identifier_user2],
+        [identifier_user2, identifier_user2, userCode1],
         (error, results, fields) => {
           if (error) {
             reject(error);
@@ -29,7 +29,7 @@ router.post("/addNegotiation", async (req, res) => {
 
     if (results.length === 0) {
       res.status(404).json({
-        error: "User not found",
+        error: "Phone or Username isn't exist or belongs to you!",
         identifier: identifier_user2,
       });
       return;

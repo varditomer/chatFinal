@@ -10,7 +10,7 @@ let selectedNegotiationId
 function loadMediatorsUnassignedNegotiations() {
 
   const yourUrl = "/api/negotiation/getUnassignedNegotiations";
-  const titles = ['#', 'Title', 'Description', 'Topic Description', ''];
+  const titles = ['num', 'Title', 'Description', 'Topic Description', ''];
 
   fetch(yourUrl)
     .then((res) => res.json())

@@ -8,9 +8,9 @@ fetch(yourUrl)
   .then((res) => {
     let strHtml = ""; // Initialize an empty string to store the HTML table structure
     strHtml += /*html*/ `
-      <table id="data" border="2" style="margin-left:auto; font-size:15px; margin-right:auto; color:black;overflow:auto">
+      <table id="data" style="margin-left:auto; font-size:15px; margin-right:auto; color:black;overflow:auto">
         <tr class="row header">
-          <th class="cell">#</th>
+          <th class="cell">Num</th>
           <th class="cell">Negotiation ID</th>
           <th class="cell">Title</th>
           <th class="cell">Description</th>
@@ -24,7 +24,7 @@ fetch(yourUrl)
       let { negoid, title, description, startTime, endTime } = obj; // Destructure negotiation object properties
       strHtml += /*html*/ `
         <tr class="row">
-          <td data-title="#" class="cell">${i + 1} </td>
+          <td data-title="Num" class="cell">${i + 1} </td>
           <td data-title="Negotiation ID" class="cell">${negoid} </td>
           <td data-title="Title" class="cell">${title}</td>
           <td data-title="Description" class="cell">${description}</td>

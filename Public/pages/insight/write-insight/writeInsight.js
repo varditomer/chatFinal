@@ -29,6 +29,7 @@ function addInsight() {
     body: JSON.stringify(insightToAdd),
   })
     .then((response) => {
+      console.log(`response:`, response)
       if (response.ok) {
         alert("Your insight is saved, you can return to the chat and continue negotiation");
       } else {
