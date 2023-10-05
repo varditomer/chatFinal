@@ -12,11 +12,11 @@ document.getElementById("phone").value = loggedInUser.phone
 
 
 function validateForm() {
-  const firstNameInput = document.getElementById("firstname");
-  const lastNameInput = document.getElementById("lastname");
+  const firstNameInput = document.getElementById("firstName");
+  const lastNameInput = document.getElementById("lastName");
   const emailInput = document.getElementById("mail");
   const phoneInput = document.getElementById("phone");
-  const subjectInput = document.getElementById("Subject");
+  const subjectInput = document.getElementById("subject");
   const descriptionInput = document.getElementById("description");
 
   // Reset error messages
@@ -80,15 +80,16 @@ function validateForm() {
 function sendEmail() {
   const isValidForm = validateForm();
   if (isValidForm) {
-    const yourUrl = "/api/email/sendEmail";
+    const yourUrl = "/api/contact-us";
     const appeal = {
-      firstName: document.getElementById("firstname").value,
-      lastName: document.getElementById("lastname").value,
+      firstName: document.getElementById("firstName").value,
+      lastName: document.getElementById("lastName").value,
       mail: document.getElementById("mail").value,
       phone: document.getElementById("phone").value,
-      subject: document.getElementById("Subject").value,
+      subject: document.getElementById("subject").value,
       description: document.getElementById("description").value,
-      userType: loggedInUser.userType
+      userType: loggedInUser.userType,
+      username: loggedInUser.username
     };
     console.log(`appeal:`, appeal)
 

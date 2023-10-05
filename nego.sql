@@ -185,7 +185,27 @@ INSERT INTO `notifications` (`id`, `UserCode`, `content`, `isSeen`) VALUES
 (5, 5, 'Please check your negotiation last messages', 1),
 (6, 5, 'Please update your profile', 0);
 
+
+
+
 ALTER TABLE `negotiation`
   ADD CONSTRAINT `negotiation_ibfk_1` FOREIGN KEY (`userCode1`) REFERENCES `user` (`userCode`),
   ADD CONSTRAINT `negotiation_ibfk_2` FOREIGN KEY (`userCode2`) REFERENCES `user` (`userCode`),
   ADD CONSTRAINT `negotiation_ibfk_4` FOREIGN KEY (`mediatorCode`) REFERENCES `user` (`userCode`);
+
+
+
+
+CREATE TABLE `contact_us` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `mail` varchar(255) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `userType` varchar(50) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`username`) REFERENCES `user` (`username`)
+);
