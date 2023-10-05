@@ -1,6 +1,6 @@
 import { userService } from "../../../services/user.service.js";
 
-const yourUrl = "/api/admin/query5";
+const yourUrl = "/api/admin/getCompletedNegotiationsDetails";
 
 // Make a GET request to fetch negotiation data from the specified URL
 fetch(yourUrl)

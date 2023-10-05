@@ -29,14 +29,13 @@ router.get("/getUsers", (req, res) => {
  * Retrieves general user information (firstName, lastName, email, username, phone, userType).
  * Responds with a JSON array containing the requested user details.
  */
-router.get("/query1", (req, res) => {
+router.get("/getUsersInfo", (req, res) => {
   db.query(
     `SELECT firstName, lastName, email, username, phone, userType
     FROM user
     `,
     ["manager", 1],
     function (error, result) {
-      console.log(result);
       res.send(result);
     }
   );
@@ -44,7 +43,7 @@ router.get("/query1", (req, res) => {
 
 //  Retrieves user information along with the count of negotiations they're involved in, excluding managers and specific userCode.
 //  Responds with userCode, firstName, lastName, userType, and negotiation count (Num).
-router.get("/query2", (req, res) => {
+router.get("/getUserNegotiationsCount", (req, res) => {
   db.query(
     `SELECT  userCode ,firstName , lastName , userType , COUNT(*) AS Num
            FROM user, negotiation
@@ -54,26 +53,7 @@ router.get("/query2", (req, res) => {
            AND userType!=? AND userCode!=?
            GROUP BY  user.userCode
            `,
-    ["manager", 100],
-    function (error, result) {
-      console.log(JSON.stringify(result));
-      res.send(result);
-    }
-  );
-});
-
-/**
- * Retrieves the number of messages for each negotiation, including negotiation ID and message count (Num).
- * Responds with negotiation ID, title, and message count.
- */
-router.get("/query3", (req, res) => {
-  db.query(
-    `
-      SELECT negotiation.negoid,title, COUNT(*) AS Num
-      FROM message, negotiation
-      WHERE message.negoid = negotiation.negoid 
-      GROUP BY  negotiation.negoid
-    `,
+    ["manager", 1],
     function (error, result) {
       console.log(JSON.stringify(result));
       res.send(result);
@@ -85,7 +65,7 @@ router.get("/query3", (req, res) => {
  * Retrieves ongoing negotiations with details such as negotiation ID, title, description, start time, user codes, and mediator code.
  * Responds with negotiation ID, title, description, start time, user codes, and mediator code for active negotiations.
  */
-router.get("/query4", (req, res) => {
+router.get("/getOpenNegotiationsDetails", (req, res) => {
   db.query(
     `SELECT  negoid, title, description, startTime, userCode1, userCode2, mediatorCode
            FROM negotiation
@@ -102,7 +82,7 @@ router.get("/query4", (req, res) => {
  * Retrieves completed negotiations with details such as negotiation ID, title, description, start time, and end time.
  * Responds with negotiation ID, title, description, start time, and end time for completed negotiations.
  */
-router.get("/query5", (req, res) => {
+router.get("/getCompletedNegotiationsDetails", (req, res) => {
   db.query(
     `SELECT  negoid, title, description, startTime, endTime
            FROM negotiation
@@ -115,23 +95,5 @@ router.get("/query5", (req, res) => {
   );
 });
 
-/**
- * Retrieves the count of users based on their user type, excluding managers and specific user code.
- * Responds with user type and user count (num).
- */
-router.get("/query6", (req, res) => {
-  db.query(
-    `SELECT userType, COUNT(*) AS num
-          FROM user
-          WHERE userCode != ? AND userType!=?
-          GROUP BY  userType;
-          `,
-    [100, "manager"],
-    function (error, result) {
-      console.log(JSON.stringify(result));
-      res.send(result);
-    }
-  );
-});
 
 module.exports = router;

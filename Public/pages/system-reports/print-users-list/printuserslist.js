@@ -1,6 +1,6 @@
 import { userService } from "../../../services/user.service.js";
 
-const yourUrl = "/api/admin/query1";
+const yourUrl = "/api/admin/getUsersInfo";
 
 // Make a GET request to the specified URL to fetch user data
 fetch(yourUrl)

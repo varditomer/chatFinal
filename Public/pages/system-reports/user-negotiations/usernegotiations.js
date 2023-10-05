@@ -1,5 +1,5 @@
 import { userService } from "../../../services/user.service.js";
-const yourUrl = "/api/admin/query2";
+const yourUrl = "/api/admin/getUserNegotiationsCount";
 
 // Fetch data from the specified URL and parse it as JSON
 fetch(yourUrl)
