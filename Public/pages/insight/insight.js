@@ -12,7 +12,7 @@ fetch(yourUrl)
       strHtml += `
       <h5 style="display: flex; gap: 10px; align-items: center; font-size: 28px; justify-content: center;">
       <i class="fas fa-gavel" style="color: red; text-decoration: line-through; text-decoration-color: black;"></i>
-        You have no Negotiations Summaries
+        You have no Insights
       </h5>
       `
         ;

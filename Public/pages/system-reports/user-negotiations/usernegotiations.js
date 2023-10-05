@@ -1,44 +1,43 @@
 import { userService } from "../../../services/user.service.js";
 const yourUrl = "/api/admin/query2";
 
+// Fetch data from the specified URL and parse it as JSON
 fetch(yourUrl)
   .then((res) => res.json())
   .then((res) => {
-    let strHtml = "";
+    let strHtml = ""; // Initialize an empty string to store the HTML table structure
     strHtml += /*html*/ `
-    <table id="data" border="2" style="margin-left:auto; font-size:15px; margin-right:auto; color:black;overflow:auto;width:100%">
-            <tr class="row header">
-              <th class="cell">#</th>
-              <th class="cell">User Code</th>
-               <th class="cell">First Name</th>
-               <th class="cell">Last Name</th>
-               <th class="cell">User Type</th>
-               <th class="cell">Number of negotiation</th>
-            </tr>
-              `;
+      <table id="data" border="2" style="margin-left:auto; font-size:15px; margin-right:auto; color:black; overflow:auto; width:100%">
+        <tr class="row header">
+          <th class="cell">#</th>
+          <th class="cell">User Code</th>
+          <th class="cell">First Name</th>
+          <th class="cell">Last Name</th>
+          <th class="cell">User Type</th>
+          <th class="cell">Number of Negotiation</th>
+        </tr>
+    `; // Add table headers to the HTML structure
 
-    let myarray = res;
-
-    myarray.forEach((obj,idx) => {
-      let { userCode, firstName, lastName, userType, Num } = obj;
+    // Iterate through the fetched user data and generate rows for the HTML table
+    res.forEach((obj, idx) => {
+      let { userCode, firstName, lastName, userType, Num } = obj; // Destructure user object properties
       strHtml += /*html*/ `
-              
-<tr class="row">
-              <td data-title="#" class="cell">${idx+1} </td>           
-              <td data-title="User Code" class="cell">${userCode} </td>           
-              <td data-title="First Name" class="cell">${firstName}</td>
-              <td data-title="Last Name" class="cell">${lastName}</td>
-              <td data-title="User Type" class="cell">${userType}</td>
-              <td data-title="Number Of Negotiation" class="cell"> ${Num}</td>
-            </tr>
-              `;
+        <tr class="row">
+          <td data-title="#" class="cell">${idx + 1}</td>
+          <td data-title="User Code" class="cell">${userCode}</td>
+          <td data-title="First Name" class="cell">${firstName}</td>
+          <td data-title="Last Name" class="cell">${lastName}</td>
+          <td data-title="User Type" class="cell">${userType}</td>
+          <td data-title="Number Of Negotiation" class="cell">${Num}</td>
+        </tr>
+      `; // Add user data to the HTML structure row by row
     });
 
-    //console.log(strHtml);
     strHtml += /*html*/ `
-            <button onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>        
-                `;
+      <button class="btn" onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>
+    `; // Add a button to export the table data to an Excel file
 
+    // Insert the generated HTML table structure and export button into the element with id "data1"
     document.getElementById("data1").innerHTML = strHtml;
   });
 

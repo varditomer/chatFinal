@@ -4,7 +4,7 @@ const db = require("../services/db.service");
 var nodemailer = require("nodemailer");
 
 
-
+// Fetch approved mediators' usernames
 router.get("/approvedMed", (req, res) => {
   const isApproved = 1;
   const type = "mediator";
@@ -17,6 +17,7 @@ router.get("/approvedMed", (req, res) => {
   );
 });
 
+// Fetch approved mediators' detailed information
 router.get("/getMediators", (req, res) => {
   const isApproved = 1;
   const type = "mediator";
@@ -37,6 +38,7 @@ router.get("/getMediators", (req, res) => {
   );
 });
 
+// Fetch unapproved mediators' basic information
 router.get("/getUnapprovedMediators", (req, res) => {
   const isApproved = 0;
   const type = "mediator";
@@ -77,7 +79,7 @@ router.get("/getUnapprovedMediators", (req, res) => {
   );
 });
 
-
+// Approve a mediator
 router.post("/approveMediator", (req, res) => {
   const { username } = req.body
   console.log(`username:`, username)
@@ -98,8 +100,8 @@ router.post("/approveMediator", (req, res) => {
   );
 });
 
+// Route to assign unexist expertise to mediator
 router.post("/assignExpertise", (req, res) => {
-  console.log(`req.body:`, req.body)
   const { expertiseCode, expertiseName, username } = req.body;
 
   if (expertiseName) {  // If adding new expertise
@@ -119,6 +121,7 @@ router.post("/assignExpertise", (req, res) => {
     assignExpertiseToMediator(username, expertiseCode, res);
   }
 });
+
 
 function assignExpertiseToMediator(username, expertiseCode, res) {
   db.query(
@@ -217,6 +220,7 @@ router.post("/assignmedi", (req, res) => {
   );
 });
 
+// Check if a user is a mediator or not
 router.post("/checkinsti", (req, res) => {
   db.query(
     `SELECT userType
@@ -233,7 +237,7 @@ router.post("/checkinsti", (req, res) => {
   );
 });
 
-
+// Fetch negotiations handled by a specific mediator
 router.get("/query8/:username", (req, res) => {
   const { username } = req.params;
   db.query(

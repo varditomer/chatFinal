@@ -2,6 +2,11 @@ const express = require("express");
 const router = express.Router();
 const db = require("../services/db.service");
 
+
+/**
+ * Retrieves mediators and negotiators from the database, sorting by userType and lastName.
+ * Responds with userCode, firstName, lastName, and userType.
+ */
 router.get("/getUsers", (req, res) => {
   db.query(
     `SELECT firstName, lastName, userCode, userType 
@@ -20,6 +25,10 @@ router.get("/getUsers", (req, res) => {
   );
 });
 
+/**
+ * Retrieves general user information (firstName, lastName, email, username, phone, userType).
+ * Responds with a JSON array containing the requested user details.
+ */
 router.get("/query1", (req, res) => {
   db.query(
     `SELECT firstName, lastName, email, username, phone, userType
@@ -33,6 +42,8 @@ router.get("/query1", (req, res) => {
   );
 });
 
+//  Retrieves user information along with the count of negotiations they're involved in, excluding managers and specific userCode.
+//  Responds with userCode, firstName, lastName, userType, and negotiation count (Num).
 router.get("/query2", (req, res) => {
   db.query(
     `SELECT  userCode ,firstName , lastName , userType , COUNT(*) AS Num
@@ -51,6 +62,10 @@ router.get("/query2", (req, res) => {
   );
 });
 
+/**
+ * Retrieves the number of messages for each negotiation, including negotiation ID and message count (Num).
+ * Responds with negotiation ID, title, and message count.
+ */
 router.get("/query3", (req, res) => {
   db.query(
     `
@@ -66,6 +81,10 @@ router.get("/query3", (req, res) => {
   );
 });
 
+/**
+ * Retrieves ongoing negotiations with details such as negotiation ID, title, description, start time, user codes, and mediator code.
+ * Responds with negotiation ID, title, description, start time, user codes, and mediator code for active negotiations.
+ */
 router.get("/query4", (req, res) => {
   db.query(
     `SELECT  negoid, title, description, startTime, userCode1, userCode2, mediatorCode
@@ -79,6 +98,10 @@ router.get("/query4", (req, res) => {
   );
 });
 
+/**
+ * Retrieves completed negotiations with details such as negotiation ID, title, description, start time, and end time.
+ * Responds with negotiation ID, title, description, start time, and end time for completed negotiations.
+ */
 router.get("/query5", (req, res) => {
   db.query(
     `SELECT  negoid, title, description, startTime, endTime
@@ -92,6 +115,10 @@ router.get("/query5", (req, res) => {
   );
 });
 
+/**
+ * Retrieves the count of users based on their user type, excluding managers and specific user code.
+ * Responds with user type and user count (num).
+ */
 router.get("/query6", (req, res) => {
   db.query(
     `SELECT userType, COUNT(*) AS num
