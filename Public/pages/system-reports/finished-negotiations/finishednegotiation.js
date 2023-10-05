@@ -35,7 +35,7 @@ fetch(yourUrl)
     });
 
     strHtml += /*html*/ `
-      <button style="width:250px" onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>
+      <button class="btn" onclick="exportTableToExcel('data')">Export Table Data To Excel File</button>
     `; // Add a button to export the table data to an Excel file
 
     // Insert the generated HTML table structure and export button into the element with id "data1"

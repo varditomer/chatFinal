@@ -66,6 +66,7 @@ a {
   color: var(--dark-color-a);
   border: 0;
   font-size: 17px;
+  border-radius: 12px;
 }
 
 button {
